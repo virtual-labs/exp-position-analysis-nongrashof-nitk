@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="UTF-8">
+
+<title>SOLVE - Dynamics of Machines Lab - Four Bar Mechanism</title>
+
+<!-- DND-Required css and js files -->
+<link rel="stylesheet" href="sins/MOMstyle.css" />
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js'></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui/ui/jquery-ui.js"></script>
+<script type="text/javascript" src= "sins/MOMscript.js"></script>
+<script type="text/javascript" src= "sins/gauss.js"></script>
+
+<script type="text/javascript" >
+//Script specific to simulation
+
+//program variables
+//controls section
+var simstatus=0; 
+var rotstatus=1;
+var tabchanges=0;
+var screenchanges=0;
+//comments section
+var commenttext="Some Text";
+var commentloc=0;
+//computing section
+var trans= new point(100,120);
+var trans1= new point(200,250);
+var transV= new point(400,100);
+var transA= new point(250,220);
+var transl1 = new point(400,75);
+var transl2 = new point(450,100);
+var transl3 = new point(200,300);
+var transl4= new point(400,300);
+//var cross= new point(375,150);
+var a= new point(0,0,"A");
+var b= new point(0,0,"B");
+var c= new point(0,0,"C");
+var d= new point(0,0,"D");
+var ax= new point(0,0,"A");
+var bx= new point(0,0,"B");
+var cx= new point(0,0,"C");
+var dx= new point(0,0,"D");
+var abxcg= new point(0,0,"");
+var bcxcg= new point(0,0,"");
+var cdxcg= new point(0,0,"");
+var p= new point(0,0,"P");
+var q= new point(0,0,"Q");
+//var b2= new point(0,0,"B");
+//var c2= new point(0,0,"C");
+//Link 1 Free Body Diagram
+var al1= new point(0,0,"A");
+var al1mesh = [];
+var dl1= new point(0,0,"D");
+var dl1mesh = [];
+//Forces for Link1
+var f21= new point(0,0,"F21");
+var f21theta;
+var f41theta;
+var f41= new point(0,0,"F41");
+//Link 2 Free Body Diagram
+var al2= new point(0,0,"A");
+var bl2= new point(0,0,"B");
+var abcg = new point(0,0,"");
+var abm = new point(0,0,"");
+var al2mesh=[];
+var bl2mesh=[];
+//Forces for Link2
+var f12= new point(0,0,"F12");
+var f12theta;
+var f32theta;
+var f32= new point(0,0,"F32");
+var fcg2= new point(0,0,"Fcg2");
+var fcg2theta= 0;
+var fin2= new point(0,0,"Fin2");
+var fin2theta=0;
+//Link 3 Free Body Diagram
+var bl3= new point(0,0,"B");
+var cl3= new point(0,0,"C");
+var bccg = new point(0,0,"");
+var bcm = new point(0,0,"");
+var bl3mesh=[];
+var cl3mesh=[];
+//Forces for Link 3
+var f23= new point(0,0,"F23");
+var f23theta;
+var f43theta;
+var f43= new point(0,0,"F43");
+var fcg3= new point(0,0,"Fcg3");
+var fcg3theta= 0;
+var fin3= new point(0,0,"Fin3");
+var fin3theta;
+//Link 4 Free Body Diagram
+var cl4= new point(0,0,"C");
+var dl4= new point(0,0,"D");
+var cdm = new point(0,0,"");
+var cdcg = new point(0,0,"");
+var cl4mesh=[];
+var dl4mesh=[];
+//Forces for Link 4
+var f34= new point(0,0,"F34");
+var f34theta;
+var f14theta;
+var f14= new point(0,0,"F14");
+var fcg4= new point(0,0,"Fcg4");
+var fcg4theta= 0;
+var fin4= new point(0,0,"Fin4");
+var fin4theta;
+//Acceleration of CGs
+var abcga= new point(0,0,"");
+var bccga= new point(0,0,"acg2");
+var cdcga= new point(0,0,"");
+//.................................................
+var vo= new point(0,0,"");
+var vba= new point(0,0,"");
+var vcb= new point(0,0,"");
+var vca= new point(0,0,"");
+
+var ao= new point(0,0,"Ao");
+var ab= new point(0,0,"Ab");
+var acb= new point(0,0,"Acb"); // acceleration of c wrt b
+var ac= new point(0,0,"Ac");
+var accb= new point(0,0,"ACcb");
+var acc= new point(0,0,"ACc");
+var atcb= new point(0,0,"ATcb");
+var atc= new point(0,0,"ATc");
+//-------------------------------------------------------
+hf2 = new point(0,0,"");
+hf3 = new point(0,0,"");
+hf4 = new point(0,0,"");
+//-------------------------------------------------------
+var a2cgx, a2cgy, a3cgx, a3cgy, a4cgx, a4cgy;
+var beta2, beta3, beta4;
+var abcgtheta,bccgtheta,cdcgtheta;
+var a2cg, a3cg, a4cg,a2,a4;
+
+var vel2=0, vel3=0, vel4=0;
+var acctb=0,acccb=0,acclb=0,acctcb=0,accccb=0,acclcb=0,acccc=0,acctc=0,acclc=0;
+var r1= 40, r2=40, r3=40, r4=40;
+var r12x,r12y,r32x,r32y,r23y,r23x,r43y,r43x,r34x,r34y,r14x,r14y;
+var theta2 = 55; // all angles to be defined either in degrees only or radians only throughout the program and convert as and when required
+var theta3=0, theta4=0; // All angles in Degrees. (mention the specification in the script like here) 
+var omega2=1; // angular velocity in rad/s
+var omega3=0, omega4=0;
+var alpha2=0, alpha3=0, alpha4=0;
+var gamma=0, gammadash=0, theta3dash=0, theta4dash=0;
+var k,ka,kb,kc,det;
+var F12x,F32x,F23x,F43x,F34x,F14x;
+var F12y,F32y,F23y,F43y,F34y,F14y;
+var F12,F32,F23,F43,F34,F14;
+var mab, mbc, mcd;
+var h2,h3,h4;
+var flaggrashof=true, firstrun=true;
+var m2,m3,m4;
+var Ig2,Ig3,Ig4;
+var x1,x2,x3,x4,x5,x6,x7,x8,x9;
+var x1coord,y1coord;
+var fpx=0;
+var fpy=0;
+var t4=0;
+//force variables
+var fi2,fi3,fi4;
+//graphics section
+var canvas;
+var ctx;
+var scaleP=1;
+var scaleV=1;
+var Sin=0.3;
+//timing section
+var simTimeId = setInterval("",'1000');
+var pauseTime = setInterval("",'1000');
+var time=0;
+var sol = [0,0,0];
+//point tracing section
+var ptx = [];
+var pty = [];
+//click status of legend and quick reference
+var legendCS = false;
+var quickrefCS = false;
+//temporary or dummy variables
+var temp=0;
+var s=2;
+var sc=2;
+var col=255;
+//Initializing 2-D array
+var matrix = [
+          [0, 0, 0],
+          [0, 0, 0],
+          [0, 0, 0],
+          ];
+
+//var result = [0, 0, 0];
+
+/*
+// for trials during development
+function trythis()
+{ 		alert();}
+*/
+
+//change simulation specific css content. e.g. padding on top of variable to adjust appearance in variables window
+function editcss()
+{
+$('.variable').css('padding-top','20px');
+$('#datatable1').css('position','absolute');
+$('#datatable2').css('position','absolute');
+$('#datatable3').css('position','absolute');
+$('#datatable4').css('position','absolute');
+$('#datatable1').css('left','40px');
+$('#datatable1').css('top','410px');
+$('#datatable2').css('left','40px');
+$('#datatable2').css('top','340px');
+$('#datatable3').css('left','40px');
+$('#datatable3').css('top','370px');
+$('#datatable4').css('left','40px');
+$('#datatable4').css('top','430px');
+
+$('#legend').css("width",document.getElementById('legendimg').width+"px");
+$('#legendicon').css("top","475px");
+//$('#quickref').css("height",document.getElementById('quickrefimg').height+"px");
+
+}
+
+//start of simulation here; starts the timer with increments of 0.1 seconds
+function startsim()
+{
+simTimeId=setInterval("time=time+0.1; varupdate(); ",'100');
+}
+
+// switches state of simulation between 0:Playing & 1:Paused
+function simstate()
+{
+  var imgfilename=document.getElementById('playpausebutton').src;
+  imgfilename = imgfilename.substring(imgfilename.lastIndexOf('/') + 1, imgfilename.lastIndexOf('.'));
+  if (imgfilename=="bluepausedull")
+  {
+    document.getElementById('playpausebutton').src="sins/blueplaydull.png";
+	 clearInterval(simTimeId);
+    simstatus=1;
+    $('#theta2spinner').spinner("value",theta2);			//to set simulation parameters on pause
+    pauseTime=setInterval("varupdate();",'100');
+  }
+    if (imgfilename=="blueplaydull")
+  {
+    time=0;			
+  	 clearInterval(pauseTime);
+    document.getElementById('playpausebutton').src="sins/bluepausedull.png";
+    simTimeId=setInterval("time=time+0.1; varupdate(); ",'100');    
+    simstatus=0;
+  } 
+}
+
+// switches state of rotation between 1:CounterClockWise & -1:Clockwise
+function rotstate()
+{
+  var imgfilename=document.getElementById('rotationbutton').src;
+  imgfilename = imgfilename.substring(imgfilename.lastIndexOf('/') + 1, imgfilename.lastIndexOf('.'));
+  if (imgfilename=="bluecwdull")
+  {
+    document.getElementById('rotationbutton').src="sins/blueccwdull.png";
+    rotstatus=-1;
+  }
+    if (imgfilename=="blueccwdull")
+  {
+    document.getElementById('rotationbutton').src="sins/bluecwdull.png";
+    rotstatus=1;
+  } 
+}
+
+function tabchangeb()
+{
+  
+  //imgfilename = imgfilename.substring(imgfilename.lastIndexOf('/') + 1, imgfilename.lastIndexOf('.'));
+   
+    tabchanges--;
+    if(tabchanges<0)
+    	tabchanges=0;
+  }
+  function tabchangef()
+{
+
+    tabchanges++;
+    if(tabchanges>2)
+    	tabchanges=2;
+}
+function screenchangef()
+{
+  screenchanges++;
+  if(screenchanges>3)
+    screenchanges=3;
+}
+function screenchangeb()
+{
+  screenchanges--;
+  if(screenchanges<0)
+    screenchanges=0;
+}
+function screenchange()
+{
+  if(screenchanges>=3)
+  {
+    screenchanges=3;
+    document.getElementById('screenchangesforward').src="sins/bluefwddullsbw.png";
+  }
+  else
+  {
+    document.getElementById('screenchangesforward').src="sins/bluefwddulls.png";
+  }
+
+  if(screenchanges<=0)
+  {
+    screenchanges=0;
+    document.getElementById('screenchangesbackward').src="sins/bluebkdullsbw.png";
+  }
+  else
+  {
+    document.getElementById('screenchangesbackward').src="sins/bluebkdulls.png";
+  }
+
+}
+function tabchange()
+{
+  if(tabchanges>=2)
+  {
+    tabchanges=2;
+    document.getElementById('tabchangeforward').src="sins/bluefwddullsbw.png";
+  }
+  
+  else
+  {
+    document.getElementById('tabchangeforward').src="sins/bluefwddulls.png";
+  }
+
+  if(tabchanges<=0)
+  {
+    tabchanges=0;
+    document.getElementById('tabchangebackward').src="sins/bluebkdullsbw.png";
+  }
+  else
+  {
+    document.getElementById('tabchangebackward').src="sins/bluebkdulls.png";
+  }
+}
+/*
+//Displaying Equations for Quick Reference
+function showEquations()
+{
+	if(quickrefCS)
+	{
+		$('#quickreficon').css('border', 'double');
+		$('#quickref').css('width', '0px');
+		$('#quickref').css('left', '600px');
+		$('#quickref').css('border', '0px');
+		quickrefCS=false;	
+		
+	}
+	else
+	{
+		$('#quickreficon').css('border', 'inset red');
+		$('#quickref').css('width', document.getElementById('quickrefimg').width+"px");
+		$('#quickref').css("left", 599-document.getElementById('quickrefimg').width+"px");
+		$('#quickref').css('border', 'solid 1px');
+		quickrefCS=true;	
+	}
+}
+*/
+//Modified for 4Bar Acc
+//Displaying Legend
+function showLegend()
+{
+	if(legendCS)
+	{
+		$('#legendicon').css('border', 'double');
+		$('#legend').css('height', '0px');
+		$('#legend').css('border', '0px');
+		legendCS=false;
+	}
+	else
+	{
+		$('#legendicon').css('border', 'inset red');
+		$('#legend').css("height", document.getElementById('legendimg').height+"px");
+		$('#legend').css("left", 600-document.getElementById('legendimg').width+"px");		
+		$('#legend').css("top", 472.5-document.getElementById('legendimg').height+"px");		
+		$('#legend').css('border', 'solid 1px');
+		legendCS=true;	
+	}
+}
+
+
+
+//Initialise system parameters here
+function varinit()
+{
+varchange();		
+//Variable r1 slider and number input types
+$('#r1slider').slider("value", 80);	
+$('#r1spinner').spinner("value", 80);
+//Variable r2 slider and number input types
+$('#r2slider').slider("value", 40);	
+$('#r2spinner').spinner("value", 40);
+//Variable r3 slider and number input types
+$('#r3slider').slider("value", 80);	
+$('#r3spinner').spinner("value", 80);
+//Variable r4 slider and number input types
+$('#r4slider').slider("value", 80);	
+$('#r4spinner').spinner("value", 80);
+//Variable m2 slider and number input types
+$('#m2slider').slider("value", 3);	
+$('#m2spinner').spinner("value", 3);
+//Variable m3 slider and number input types
+$('#m3slider').slider("value", 3);	
+$('#m3spinner').spinner("value", 3);
+//Variable m4 slider and number input types
+$('#m4slider').slider("value", 3);	
+$('#m4spinner').spinner("value", 3);
+//Variable theta2 slider and number input types
+$('#theta2slider').slider("value", 40);	
+$('#theta2spinner').spinner("value", 40);
+//Variable omega2 slider and number input types
+$('#omega2slider').slider("value", 1);	
+$('#omega2spinner').spinner("value", 1);
+//Force Vector x
+$('#fpxslider').slider("value", 0.5);	
+$('#fpxspinner').spinner("value",0.5);
+//Force Vector y
+$('#fpyslider').slider("value",0.5);	
+$('#fpyspinner').spinner("value",0.5);
+//T4
+$('#t4slider').slider("value", 0.5);	
+$('#t4spinner').spinner("value",0.5);
+//Rp
+$('#rpslider').slider("value", 0.5);	
+$('#rpspinner').spinner("value",0.5);
+}
+
+// Initialise and Monitor variable containing user inputs of system parameters.
+//change #id and repeat block for new variable. Make sure new <div> with appropriate #id is included in the markup
+function varchange()
+{
+//Variable r1 slider and number input types
+$('#r1slider').slider({ max : 80, min : 20, step : 2 });		// slider initialisation : jQuery widget
+$('#r1spinner').spinner({ max : 80, min : 20, step : 2 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#r1slider" ).on( "slide", function( e, ui ) { $('#r1spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#r1spinner" ).on( "spin", function( e, ui ) { $('#r1slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#r1spinner" ).on( "change", function() {  varchange() } );
+
+//Variable r2 slider and number input types
+$('#r2slider').slider({ max : 80, min : 20, step : 2 });		// slider initialisation : jQuery widget
+$('#r2spinner').spinner({ max : 80, min : 20, step : 2 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#r2slider" ).on( "slide", function( e, ui ) { $('#r2spinner').spinner("value",ui.value); ptx=[]; pty=[]; r2changed();} );
+$( "#r2spinner" ).on( "spin", function( e, ui ) { $('#r2slider').slider("value",ui.value); ptx=[]; pty=[]; r2changed();} );
+$( "#r2spinner" ).on( "change", function() {  varchange() } );
+
+//Variable r3 slider and number input types
+$('#r3slider').slider({ max : 80, min : 20, step : 2 });		// slider initialisation : jQuery widget
+$('#r3spinner').spinner({ max : 80, min : 20, step : 2 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#r3slider" ).on( "slide", function( e, ui ) { $('#r3spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#r3spinner" ).on( "spin", function( e, ui ) { $('#r3slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#r3spinner" ).on( "change", function() {  varchange() } );
+
+//Variable r4 slider and number input types
+$('#r4slider').slider({ max : 80, min : 20, step : 2 });		// slider initialisation : jQuery widget
+$('#r4spinner').spinner({ max : 80, min : 20, step : 2 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#r4slider" ).on( "slide", function( e, ui ) { $('#r4spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#r4spinner" ).on( "spin", function( e, ui ) { $('#r4slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#r4spinner" ).on( "change", function() {  varchange() } );
+//Variable m2 slider and number input types
+$('#m2slider').slider({ max : 2, min : 0, step : 0.1 });		// slider initialisation : jQuery widget
+$('#m2spinner').spinner({ max : 2, min : 0, step : 0.1 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#m2slider" ).on( "slide", function( e, ui ) { $('#m2spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#m2spinner" ).on( "spin", function( e, ui ) { $('#m2slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#m2spinner" ).on( "change", function() {  varchange() } );
+
+$('#m3slider').slider({ max : 2, min : 0, step : 0.1 });		// slider initialisation : jQuery widget
+$('#m3spinner').spinner({ max : 2, min : 0, step : 0.1 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#m3slider" ).on( "slide", function( e, ui ) { $('#m3spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#m3spinner" ).on( "spin", function( e, ui ) { $('#m3slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#m3spinner" ).on( "change", function() {  varchange() } );
+
+$('#m4slider').slider({ max : 2, min : 0, step : 0.1 });		// slider initialisation : jQuery widget
+$('#m4spinner').spinner({ max : 2, min : 0, step : 0.1 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#m4slider" ).on( "slide", function( e, ui ) { $('#m4spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#m4spinner" ).on( "spin", function( e, ui ) { $('#m4slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#m4spinner" ).on( "change", function() {  varchange() } );
+
+
+//Variable theta2 slider and number input types
+$('#theta2slider').slider({ max : 360, min : 0, step : 1 });		// slider initialisation : jQuery widget
+$('#theta2spinner').spinner({ max : 360, min : 0, step : 1 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#theta2slider" ).on( "slide", function( e, ui ) { $('#theta2spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#theta2spinner" ).on( "spin", function( e, ui ) { $('#theta2slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#theta2spinner" ).on( "change", function() {  varchange() } );
+
+//Variable omega2 slider and number input types
+$('#omega2slider').slider({ max : 1.8, min : 0.2, step : 0.2 });		// slider initialisation : jQuery widget
+$('#omega2spinner').spinner({ max : 1.8, min : 0.2, step : 0.2 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#omega2slider" ).on( "slide", function( e, ui ) { $('#omega2spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#omega2spinner" ).on( "spin", function( e, ui ) { $('#omega2slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#omega2spinner" ).on( "change", function() {  varchange() } );
+//T4
+$('#t4slider').slider({ max : 2, min : 0, step : 0.1 });		// slider initialisation : jQuery widget
+$('#t4spinner').spinner({ max : 2, min : 0, step : 0.1 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#t4slider" ).on( "slide", function( e, ui ) { $('#t4spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+$( "#t4spinner" ).on( "spin", function( e, ui ) { $('#t4slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+$( "#t4spinner" ).on( "change", function() {  varchange() } );
+
+varupdate();
+
+}
+
+//Four Bar Specific : resetting lower limit of r1 r3 r4 on change of r2
+function acttan(x1coord,y1coord)
+{
+	if(x1coord>=0 && y1coord>=0)
+return deg(Math.atan(y1coord/x1coord));
+if(x1coord>0 && y1coord<0)
+return 360+deg(Math.atan(y1coord/x1coord));
+if(x1coord<0 && y1coord>0)
+return 180+deg(Math.atan(y1coord /x1coord));
+if(x1coord<0 && y1coord<0)
+return 180+deg(Math.atan(y1coord/x1coord));
+
+}
+
+
+function r2changed()
+{
+
+$('#r1slider').slider({min: $('#r2spinner').spinner('value')});
+$('#r3slider').slider({min: $('#r2spinner').spinner('value')});
+$('#r4slider').slider({min: $('#r2spinner').spinner('value')});
+$('#r1spinner').spinner({min: $('#r2spinner').spinner('value')});
+$('#r3spinner').spinner({min: $('#r2spinner').spinner('value')});
+$('#r4spinner').spinner({min: $('#r2spinner').spinner('value')});
+}
+
+//Computing of various system parameters
+function varupdate()
+{
+
+//updating slider location with change in spinner(debug)
+$('#r1slider').slider("value", $('#r1spinner').spinner('value'));  
+$('#r2slider').slider("value", $('#r2spinner').spinner('value'));
+$('#r3slider').slider("value", $('#r3spinner').spinner('value'));
+$('#r4slider').slider("value", $('#r4spinner').spinner('value'));
+  //updating slider location with change in spinner(Mass)
+$('#m2slider').slider("value", $('#m2spinner').spinner('value'));
+$('#m3slider').slider("value", $('#m3spinner').spinner('value'));
+$('#m4slider').slider("value", $('#m4spinner').spinner('value'));
+
+$('#theta2slider').slider("value", $('#theta2spinner').spinner('value')); 
+$('#omega2slider').slider("value", $('#omega2spinner').spinner('value')); 
+//External Force and Torque
+$('#fpxslider').slider("value", $('#fpxspinner').spinner('value'));
+$('#fpyslider').slider("value", $('#fpyspinner').spinner('value'));
+$('#t4slider').slider("value", $('#t4spinner').spinner('value'));
+//Link Lenghts
+r1=$('#r1spinner').spinner("value");
+r2=$('#r2spinner').spinner("value");
+r3=$('#r3spinner').spinner("value");
+r4=$('#r4spinner').spinner("value");
+//Link Masses
+m2=$('#m2spinner').spinner("value");
+m3=$('#m3spinner').spinner("value");
+m4=$('#m4spinner').spinner("value");
+//External Forces
+fpx=$('#fpxspinner').spinner("value");
+fpy=$('#fpyspinner').spinner("value");
+t4=$('#t4spinner').spinner("value");
+
+printcomment("Navigate to various other pages through the buttons",2);
+
+//m3=$('#m3spinner').spinner("value");
+//m4=$('#m4spinner').spinner("value");
+screenchange();
+tabchange();
+if(tabchanges==0)
+{
+$('#linklenght').show();
+$('#linkmass').hide();
+$('#linkmass1').hide();
+$('#linkmass2').hide();
+$('#linklenght1').show();
+$('#linklenght2').show();
+$('#linklenght3').show();
+$('#linkmass1').hide();
+$('#forcepx').hide();
+$('#forcepy').hide();
+$("#t4").hide();
+}
+
+if(tabchanges==1)
+{
+
+$('#linklenght').hide();
+$('#linkmass').show();
+$('#linklenght1').hide();
+$('#linklenght2').hide();
+$('#linklenght3').hide();
+$('#linkmass1').show();
+$('#linkmass2').show();
+$('#forcepx').hide();
+$('#forcepy').hide();
+$("#t4").hide();
+}
+if(tabchanges==2)
+{
+$('#forcepx').show();
+$('#forcepy').show();
+$('#linklenght').hide();
+$('#linkmass').hide();
+$('#linkmass1').hide();
+$('#linkmass2').hide();
+$('#linklenght1').hide();
+$('#linklenght2').hide();
+$('#linklenght3').hide();
+$('#linkmass1').hide();
+$("#t4").show();
+}
+
+if(!simstatus)
+{
+$('#omega2set').show();
+$('#theta2set').hide();
+omega2=rotstatus*$('#omega2spinner').spinner("value");
+theta2=theta2+(0.1*deg(omega2));
+theta2=theta2%360;
+}
+if(simstatus)
+{
+if(firstrun){r2changed(); firstrun=false;}
+$('#omega2set').hide();
+$('#theta2set').show();
+theta2=$('#theta2spinner').spinner("value");
+omega2=rotstatus*$('#omega2spinner').spinner("value");
+}
+checkGrashof();
+if(flaggrashof)
+{
+
+k=(r2*r2-r3*r3+r4*r4+r1*r1)/2;
+ka=k-r2*(r1-r4)*Math.cos(rad(theta2))-r4*r1;
+kb=-2*r2*r4*Math.sin(rad(theta2));
+kc=k-r2*(r1+r4)*Math.cos(rad(theta2))+r4*r1;
+det=kb*kb-4*ka*kc;
+
+a.xcoord=0;
+a.ycoord=0;
+vo.xcoord=0;
+vo.ycoord=0;
+ao.xcoord=0;
+ao.ycoord=0;
+
+b.xcoord=a.xcoord+(r2*Math.cos(rad(theta2)));
+b.ycoord=a.ycoord+(r2*Math.sin(rad(theta2)));
+d.xcoord=a.xcoord+(r1);
+d.ycoord=a.ycoord;
+
+	if(r1==r3 && r2==r4)
+	{
+		theta4=theta2;
+		/*if(theta2<180)
+		theta4dash=deg(2*Math.atan((-kb+Math.sqrt(det))/(2*ka)));
+		else
+		theta4dash=deg(2*Math.atan((-kb-Math.sqrt(det))/(2*ka)));*/
+	}
+	else
+	{
+	theta4=deg(2*Math.atan((-kb-Math.sqrt(det))/(2*ka)));
+	//theta4dash=deg(2*Math.atan((-kb+Math.sqrt(det))/(2*ka)));
+	
+	}
+	//theta3=deg(Math.asin((r4*Math.sin(rad(theta4))-r2*Math.sin(rad(theta2)))/r3));
+
+	
+	//theta3dash=deg(Math.asin((r4*Math.sin(rad(theta4dash))-r2*Math.sin(rad(theta2)))/r3));
+	
+	c.xcoord=d.xcoord+r4*Math.cos(rad(theta4));
+	c.ycoord=d.ycoord+r4*Math.sin(rad(theta4));
+	theta3=deg(Math.atan((c.ycoord-b.ycoord)/(c.xcoord-b.xcoord)));
+
+	//c2.xcoord=d2.xcoord+r4*Math.cos(rad(theta4dash));
+	//c2.ycoord=d2.ycoord+r4*Math.sin(rad(theta4dash));
+	gamma=theta4-theta3;
+	//gammadash=theta4dash-theta3dash;
+	if(theta2<0)
+		theta2+=360;
+	if(theta3<0)
+		theta3+=180;
+	if(theta4<0)
+		theta4+=360;
+	/*if(theta3dash<0)
+		theta3dash+=360;
+	if(theta4dash<0)
+		theta4dash+=360;
+	if(theta3dash==360)
+		theta3dash=0;*/
+	//Positon Diagram for acceleration diagram
+ax.xcoord=0;
+ax.ycoord=0;
+bx.xcoord=ax.xcoord+(sc*r2*Math.cos(rad(theta2)));
+bx.ycoord=ax.ycoord+(sc*r2*Math.sin(rad(theta2)));
+dx.xcoord=ax.xcoord+(sc*r1);
+dx.ycoord=ax.ycoord;
+cx.xcoord=dx.xcoord+sc*r4*Math.cos(rad(theta4));
+cx.ycoord=dx.ycoord+sc*r4*Math.sin(rad(theta4));
+//Coordinate Definitions for cgs for acceleration diagram
+abxcg.xcoord=(ax.xcoord+bx.xcoord)/2;
+abxcg.ycoord=(ax.ycoord+bx.ycoord)/2;
+bcxcg.xcoord=(cx.xcoord+bx.xcoord)/2;
+bcxcg.ycoord=(cx.ycoord+bx.ycoord)/2;
+cdxcg.xcoord=(cx.xcoord+dx.xcoord)/2;
+cdxcg.ycoord=(cx.ycoord+dx.ycoord)/2;
+Scale = 1;
+/*
+if(Math.abs(r2*omega2)<20) scaleV=4;
+else if(Math.abs(r2*omega2)>20 && Math.abs(r2*omega2)<40) scaleV=3;
+else if(Math.abs(r2*omega2)>120 && Math.abs(r2*omega2)<160) scaleV=0.5;
+else if(Math.abs(r2*omega2)>160) scaleV=0.25;
+else scaleV=1;
+*/
+vel2=r2*omega2*scaleV;
+vba.xcoord=vo.xcoord+vel2*Math.cos(rad(theta2+90));
+vba.ycoord=vo.ycoord+vel2*Math.sin(rad(theta2+90));
+omega3= (r2*omega2/r3)* (Math.sin(rad(theta2))*Math.cos(rad(theta4))-Math.sin(rad(theta4))*Math.cos(rad(theta2)))/(Math.sin(rad(theta4))*Math.cos(rad(theta3))-Math.sin(rad(theta3))*Math.cos(rad(theta4)));
+omega4= (r2*omega2/r4)* (Math.sin(rad(theta2))*Math.cos(rad(theta3))-Math.sin(rad(theta3))*Math.cos(rad(theta2)))/(Math.sin(rad(theta4))*Math.cos(rad(theta3))-Math.sin(rad(theta3))*Math.cos(rad(theta4)));
+vel3=r3*omega3*scaleV;
+vel4=r4*omega4*scaleV;
+vcb.xcoord= vba.xcoord+vel3*Math.cos(rad(theta3+90));
+vcb.ycoord= vba.ycoord+vel3*Math.sin(rad(theta3+90));
+vca.xcoord= vo.xcoord+vel4*Math.cos(rad(theta4+90));
+vca.ycoord= vo.ycoord+vel4*Math.sin(rad(theta4+90));
+
+//acceleration calculations
+
+acccb=r2*omega2*omega2;
+acctb=0;
+acclb=Math.sqrt(acctb*acctb+acccb*acccb);
+accccb=r3*omega3*omega3;
+acccc=r4*omega4*omega4;
+var ta=0,tb=0,tc=0,td=0,te=0,tf=0;
+
+ta=r4*Math.sin(rad(theta4));
+tb=r3*Math.sin(rad(theta3));
+td=r4*Math.cos(rad(theta4));
+te=r3*Math.cos(rad(theta3));
+tc=acccb*
+Math.cos(rad(theta2))+accccb*Math.cos(rad(theta3))-acccc*Math.cos(rad(theta4));
+tf=-acccb*Math.sin(rad(theta2))-accccb*Math.sin(rad(theta3))+acccc*Math.sin(rad(theta4));
+
+alpha3=(tc*td-ta*tf)/(ta*te-tb*td);
+alpha4=(tc*te-tb*tf)/(ta*te-tb*td);
+acctcb=alpha3*r3;
+acclcb=Math.sqrt(acctcb*acctcb+accccb*accccb);
+acctc=alpha4*r4;
+acclc=Math.sqrt(acctc*acctc+acccc*acccc);
+scaleA=1;
+//Accelration of C.G's
+a2cg = Math.sqrt(((r2*alpha2)/2)*((r2*alpha2)/2) + ((omega2*omega2)*r2/2)*((omega2*omega2)*r2/2));
+beta2=acttan((omega2*omega2),alpha2);
+a3cg = Math.sqrt(((r3*alpha3)/2)*((r3*alpha3)/2) + ((omega3*omega3)*r3/2)*((omega3*omega3)*r3/2));
+beta3=acttan((omega3*omega3),alpha3);
+a4cg = Math.sqrt(((r4*alpha4)/2)*((r4*alpha4)/2) + ((omega4*omega4)*r4/2)*((omega4*omega4)*r4/2));
+beta4=acttan((omega4*omega4),alpha4);
+fi2= m2*a2cg;
+fi3= m3*a3cg;
+fi4= m4*a4cg;
+a2=Math.sqrt((r2*omega2*omega2)*(r2*omega2*omega2)+(r2*alpha2)*(r2*alpha2));
+
+a2cgx = (a2cg)*(Math.cos(rad(theta2+beta2+180)));
+a2cgy = (a2cg)*(Math.sin(rad(theta2+beta2+180)));
+a3cgx = (a3cg)*(Math.cos(rad(theta3+beta3+180))) + a2*Math.cos(rad(theta2+beta2+180));
+a3cgy = (a3cg)*(Math.sin(rad(theta3+beta3+180))) + a2*Math.sin(rad(theta2+beta2+180));
+a4cgx = (-a4cg)*(Math.cos(rad(theta4+beta4+180)));
+a4cgy = (-a4cg)*(Math.sin(rad(theta4+beta4+180)));
+
+//Free Body Diagram coordinates
+//Link 1 definitions
+al1.xcoord=0;
+al1.ycoord=0;
+
+dl1.xcoord=a.xcoord+(r1);
+dl1.ycoord=a.ycoord;
+
+//Link 2 Defintions
+al2.xcoord=0;
+al2.ycoord=0;
+
+bl2.xcoord=a.xcoord+(r2*Math.cos(rad(theta2)));
+bl2.ycoord=a.ycoord+(r2*Math.sin(rad(theta2)));
+
+abcg.xcoord=(al2.xcoord+bl2.xcoord)/2;
+abcg.ycoord=(al2.ycoord+bl2.ycoord)/2;
+
+//Link 3 definitions
+bl3.xcoord=a.xcoord+(r2*Math.cos(rad(theta2)));
+bl3.ycoord=a.ycoord+(r2*Math.sin(rad(theta2)));
+
+cl3.xcoord=d.xcoord+r4*Math.cos(rad(theta4));
+cl3.ycoord=d.ycoord+r4*Math.sin(rad(theta4));
+
+bccg.xcoord=(bl3.xcoord+cl3.xcoord)/2;
+bccg.ycoord=(bl3.ycoord+cl3.ycoord)/2;
+//Link 4 definitions
+cl4.xcoord=cl3.xcoord;
+cl4.ycoord=cl3.ycoord;
+
+dl4.xcoord=d.xcoord;
+dl4.ycoord=d.ycoord;
+
+cdcg.xcoord=(cl4.xcoord+dl4.xcoord)/2;
+cdcg.ycoord=(cl4.ycoord+dl4.ycoord)/2;
+//Acceleration of CGs
+abcga.xcoord=a2cgx+abxcg.xcoord;
+abcga.ycoord=a2cgy+abxcg.ycoord;
+bccga.xcoord=a3cgx+bcxcg.xcoord;
+bccga.ycoord=a3cgy+bcxcg.ycoord;
+cdcga.xcoord=a4cgx+cdxcg.xcoord;
+cdcga.ycoord=a4cgy+cdxcg.ycoord;
+abcgtheta=acttan(a2cgx,a2cgy);
+bccgtheta=acttan(a3cgx,a3cgy);
+cdcgtheta=acttan(a4cgx,a4cgy);
+//Acceleration Scale Calculation
+if(Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))<10) scaleA=10;
+else if(Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))>=10 && Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))<20) scaleA=4;
+else if(Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))>=20 && Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))<40) scaleA=2;
+else if(Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))>=40 && Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))<120) scaleA=1;
+else if(Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))>=120 && Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc)))<150) scaleA=0.5;
+else scaleA=1/Math.round(Math.max(Math.abs(acclb),Math.abs(acclcb),Math.abs(acclc))/100);
+//Acceleration Coordinate Definitions
+ao.xcoord=0;
+ao.ycoord=0;
+ab.xcoord=ao.xcoord+scaleA*acclb*Math.cos(rad(180+theta2));
+ab.ycoord=ao.ycoord+scaleA*acclb*Math.sin(rad(180+theta2));
+
+accb.xcoord=ab.xcoord+scaleA*accccb*Math.cos(rad(180+theta3));
+accb.ycoord=ab.ycoord+scaleA*accccb*Math.sin(rad(180+theta3));
+atcb.xcoord=accb.xcoord+scaleA*acctcb*Math.cos(rad(90+theta3));
+atcb.ycoord=accb.ycoord+scaleA*acctcb*Math.sin(rad(90+theta3));
+
+acb.xcoord=atcb.xcoord;
+acb.ycoord=atcb.ycoord;
+
+acc.xcoord=ao.xcoord+scaleA*acccc*Math.cos(rad(180+theta4));;
+acc.ycoord=ao.ycoord+scaleA*acccc*Math.sin(rad(180+theta4));;
+atc.xcoord=acc.xcoord+scaleA*acctc*Math.cos(rad(90+theta4));
+atc.ycoord=acc.ycoord+scaleA*acctc*Math.sin(rad(90+theta4));
+
+ac.xcoord=atc.xcoord;
+ac.ycoord=atc.ycoord;
+//Dynamic Analysis Solver - Paramater Calculation
+r12x=(r2/2000)*Math.cos(rad(theta2));
+r32x=-(r2/2000)*Math.cos(rad(theta2));
+r12y=(r2/2000)*Math.sin(rad(theta2));
+r32y=-(r2/2000)*Math.sin(rad(theta2));
+r43x=-(r3/2000)*Math.cos(rad(theta3));
+r23x=(r3/2000)*Math.cos(rad(theta3));
+r43y=-(r3/2000)*Math.sin(rad(theta3));
+r23y=(r3/2000)*Math.sin(rad(theta3));
+r34x=-(r4/2000)*Math.cos(rad(theta4));
+r14x=(r4/2000)*Math.cos(rad(theta4));
+r34y=-(r4/2000)*Math.sin(rad(theta4));
+r14y=(r4/2000)*Math.sin(rad(theta4));
+Ig2=(m2*r2*r2)/12000000;
+Ig3=(m3*r3*r3)/12000000;
+Ig4=(m4*r4*r4)/12000000;
+x1= m2*a2cgx/1000;
+x2= m2*a2cgy/1000;
+x3=Ig2*alpha2;
+x4= (m3*a3cgx/1000);
+x5= (m3*a3cgy/1000);
+x6=Ig3*alpha3;
+x7= m4*a4cgx/1000;
+x8= m4*a4cgy/1000;
+x9=(Ig4*alpha4)-t4;
+
+//Dynamic Analysis Solver - Gauss Elimination Method
+
+
+$A =[ [1,        0,      1,      0,     0,     0,     0,    0,   0],
+      [0,        1,      0,      1,     0,     0,     0,    0,   0], 
+      [-r12y, r12x,  -r32y,   r32x,     0,     0,     0,    0,   1],
+      [0,        0,     -1,      0,     1,     0,     0,    0,   0], 
+      [0,        0,      0,     -1,     0,     1,     0,    0,   0],
+      [0,        0,   r23y,  -r23x,  -r43y,  r43x,    0,    0,   0],
+      [0,        0,      0,      0,    -1,     0,     1,    0,   0],
+      [0,        0,      0,      0,     0,    -1,     0,    1,   0],
+      [0,        0,      0,      0,  r34y, -r34x, -r14y,  r14x,  0]];
+
+$x = [x1, x2, x3, x4, x5, x6, x7, x8, x9];
+
+//Use below matrices for checking gauss function
+/*$A = [[1,0,0,0,0,0,0,0,0],
+      [0,1,0,0,0,0,0,0,0], 
+      [0,0,1,0,0,0,0,0,0],
+      [0,0,0,1,0,0,0,0,0], 
+      [0,0,0,0,1,0,0,0,0], 
+      [0,0,0,0,0,1,0,0,0], 
+      [0,0,0,0,0,0,1,0,0], 
+      [0,0,0,0,0,0,0,1,0], 
+      [0,0,0,0,0,0,0,0,1], 
+      ];
+      */
+      
+
+//$x = [45,50,53,54,53,50,87,101,117];
+
+$result = gauss($A, $x);
+
+F12x= $result[0];
+F12y= $result[1];
+F21x=-$result[0];
+F21y=-$result[1];
+F32x= $result[2];
+F32y= $result[3];
+F23x=-$result[2];
+F23y=-$result[3];
+F43x= $result[4];
+F43y= $result[5];
+F34x=-$result[4];
+F34y=-$result[5];
+F14x= $result[6];
+F14y= $result[7];
+
+F12= Math.sqrt((F12x*F12x)+(F12y*F12y));
+F21= -Math.sqrt((F12x*F12x)+(F12y*F12y));
+F23= Math.sqrt((F23x*F23x)+(F23y*F23y));
+F32= -Math.sqrt((F32x*F32x)+(F32y*F32y));
+F34= Math.sqrt((F34x*F34x)+(F34y*F34y));
+F43= -Math.sqrt((F43x*F43x)+(F43y*F43y));
+F14= Math.sqrt((F14x*F14x)+(F14y*F14y));
+
+//Link 1 Force Vectors
+f21.xcoord = -$result[0]*s;
+f21.ycoord = -$result[1]*s;
+f21theta = acttan(f21.xcoord,f21.ycoord);
+
+f41.xcoord = (-$result[6]*s)+r1;
+f41.ycoord = -$result[7]*s;
+f41theta = acttan(-$result[6],-$result[7]);
+
+//Link2 force vectors
+f12.xcoord = $result[0]*s;
+f12.ycoord = $result[1]*s;
+f12theta = acttan(f12.xcoord,f12.ycoord);
+
+f32.xcoord = $result[2]*s+b.xcoord;
+f32.ycoord = $result[3]*s+b.ycoord;
+f32theta = acttan($result[2],$result[3]);
+
+fcg2.xcoord=-(m2*a2cgx)*s+abcg.xcoord;
+fcg2.ycoord=-(m2*a2cgy)*s+abcg.ycoord;
+fcg2theta=acttan(fcg2.xcoord,fcg2.ycoord);
+
+fin2.xcoord=-(m2*a2cgx)*Sin+abcg.xcoord;
+fin2.ycoord=-(m2*a2cgy)*Sin+abcg.ycoord;
+fin2theta=acttan(fin2.xcoord,fin2.ycoord);
+
+
+
+//Link3 force vectors
+f23.xcoord =-$result[2]*s+b.xcoord;
+f23.ycoord =-$result[3]*s+b.ycoord;
+f23theta = acttan(-$result[2],-$result[3]);
+
+f43.xcoord = $result[4]*s+c.xcoord;
+f43.ycoord = $result[5]*s+c.ycoord;
+f43theta = acttan($result[4],$result[5]);
+
+fcg3.xcoord=-(m3*a3cgx);
+fcg3.ycoord=-(m3*a3cgy);
+fcg3theta=acttan(fcg3.xcoord,fcg3.ycoord);
+
+fin3theta=acttan(-(m3*a3cgx),-(m3*a3cgy));
+
+//Link 4 force vectors
+f34.xcoord=-$result[4]*s+c.xcoord;
+f34.ycoord=-$result[5]*s+c.ycoord;
+f34theta= acttan(-$result[4],-$result[5]);
+
+f14.xcoord=$result[6]*s+d.xcoord;
+f14.ycoord=$result[7]*s+d.ycoord;
+f14theta= acttan($result[6],$result[7]);
+
+fcg4.xcoord=-(m4*a4cgx);
+fcg4.ycoord=-(m4*a4cgy);
+fcg4theta=acttan(-a4cgx,-a4cgy);
+
+fin4theta=acttan(-(m4*a4cgx),-(m4*a4cgy));
+
+//Translation Calculations
+mab = -(bx.xcoord-abxcg.xcoord)*F32y+(bx.ycoord-abxcg.ycoord)*F32x+(ax.ycoord-abxcg.ycoord)*F12x-(ax.xcoord-abxcg.xcoord)*F12y;
+mbc = -(cx.xcoord-bcxcg.xcoord)*F43y+(cx.ycoord-bcxcg.ycoord)*F43x+(bx.ycoord-bcxcg.ycoord)*F23x-(bx.xcoord-bcxcg.xcoord)*F23y;
+mcd = -(cx.xcoord-cdxcg.xcoord)*F34y+(cx.ycoord-cdxcg.ycoord)*F34x+(dx.ycoord-cdxcg.ycoord)*F14x-(dx.xcoord-cdxcg.xcoord)*F14y+(2*t4*1000);
+//Translation distance Calculations
+h2=mab/(fi2*Math.cos(rad(fin2theta-theta2)));
+h3=mbc/(fi3*Math.cos(rad(fin3theta-theta3)));
+h4=mcd/(fi4*Math.cos(rad(fin4theta-theta4)));
+//Translated Points
+hf2.xcoord=abxcg.xcoord+h2*Math.cos(rad(theta2));
+hf2.ycoord=abxcg.ycoord+h2*Math.sin(rad(theta2));
+hf3.xcoord=bcxcg.xcoord+h3*Math.cos(rad(theta3));
+hf3.ycoord=bcxcg.ycoord+h3*Math.sin(rad(theta3));
+hf4.xcoord=cdxcg.xcoord+h4*Math.cos(rad(theta4));
+hf4.ycoord=cdxcg.ycoord+h4*Math.sin(rad(theta4));
+
+fin3.xcoord=-(m3*a3cgx)*Sin+hf3.xcoord;
+fin3.ycoord=-(m3*a3cgy)*Sin+hf3.ycoord;
+
+fin4.xcoord=-(m4*a4cgx)*Sin+hf4.xcoord;
+fin4.ycoord=-(m4*a4cgy)*Sin+hf4.ycoord;
+
+}
+if(screenchanges==0)
+  { 
+  draw(ctx);
+  drawvel(ctx);
+  drawacc(ctx);
+  printcomment("",1)
+  }
+if(screenchanges==1)
+{
+  drawaccl(ctx);
+  printcomment("Acg2=Acceleration of CG of link 2<br>Acg4=Acceleration of CG of link 4<br>Acg3=Acceleration of CG of link 3",1);
+  $('#legendicon').hide(); 
+
+}
+if(screenchanges==2)
+{
+ drawforcemoment(ctx);
+ printcomment("Finl2=Inertial Force acting on Link 2<br>Finl3 = Inertial Force acting on Link 3<br>Finl4 = Inertial Force acting on Link 4",1);
+  $('#legendicon').hide(); 
+}
+if(screenchanges==3)
+{
+ drawdyn(ctx);
+ printcomment("Respective x and y components of forces in datatable",1);
+  $('#legendicon').hide(); 
+}
+}
+//Simulation graphics
+function draw()
+{
+  canvas = document.getElementById("simscreen");
+  ctx = canvas.getContext("2d");
+  ctx.clearRect(0,0,550,400);  //clears the complete canvas#simscreen everytime
+  if (flaggrashof)
+  { 
+  
+  $('#titleincanvas').show();
+  $('#datatable1').show();
+  $('#datatable2').hide();
+  $('#datatable3').hide();
+  $('#datatable4').hide();
+  $('#vba').show();
+  $('#vcb').show();
+  $('#vca').show();
+  $('#ab').show();
+  $('#acb').show();
+  $('#ac').show(); 
+  $('#acg2').hide();
+  $('#acg3').hide();
+  $('#acg4').hide();
+  $('#f12').hide();
+  $('#f32').hide();
+  $('#f23').hide();
+  $('#f43').hide();
+  $('#f34').hide();
+  $('#f14').hide();
+   $('#fin2').hide();
+  $('#fin3').hide();
+  $('#fin4').hide(); 
+  $('#legendicon').show(); 
+   
+  a=pointtrans(a,trans);
+  b=pointtrans(b,trans);
+  c=pointtrans(c,trans);
+  d=pointtrans(d,trans);
+  
+ /* a2=pointtrans(a2,cross);
+  b2=pointtrans(b2,cross);
+  c2=pointtrans(c2,cross);
+  d2=pointtrans(d2,cross);*/
+document.getElementById('titleincanvas').innerHTML="Grashof Linkage";
+  pointjoin(a,b,ctx,"#0066FF");
+  pointjoin(b,c,ctx,"#D00000");
+  pointjoin(c,d,ctx,"#005500");
+  pointjoin(d,a,ctx,"#993300");
+ //pointjoin(a1,d1,ctx,"#993300");
+ /* pointjoin(a2,b2,ctx,"#0066FF");
+  pointjoin(b2,c2,ctx,"#D00000");
+-  pointjoin(c2,d2,ctx,"#005500");
+  pointjoin(d2,a2,ctx,"#993300");*/
+  pointdisp(a,ctx);
+  pointdisp(b,ctx);
+  pointdisp(c,ctx);
+  pointdisp(d,ctx);
+// Position Diagram Title	
+	ctx.save();
+   ctx.lineWidth=1;
+   ctx.font="12px 'Comic Sans MS'";
+   ctx.strokeStyle="#000000";
+ //displaying scale values
+  if(scaleP>=1)
+  ctx.strokeText("Position Diagram (Scale = 1:"+scaleP+")",10,10);
+  if(scaleP<1)
+  ctx.strokeText("Position Diagram (Scale = 1:"+1/scaleP+":1)",10,10);
+
+//ctx.restore();
+//ctx.restore();
+// Free Body Diagram Title	
+	ctx.save();
+   ctx.lineWidth=1;
+   ctx.font="12px 'Comic Sans MS'";
+   ctx.strokeStyle="#000000";
+//drawvel(ctx);
+   
+   
+/*  pointdisp(a2,ctx);
+  pointdisp(b2,ctx);
+  pointdisp(c2,ctx);
+  pointdisp(d2,ctx);*/
+  }
+  else
+  {
+  
+$('#titleincanvas').hide();
+$('#datatable1').hide();
+$('#datatable2').hide();
+$('#datatable3').hide();
+$('#datatable4').hide();
+//$('#datatable2').hide();
+  $('#vba').hide();
+  $('#vcb').hide();
+  $('#vca').hide();
+  $('#ab').hide();
+  $('#acb').hide();
+  $('#ac').hide();
+  $('#f12').hide();
+  $('#f32').hide();
+  $('#f23').hide();
+  $('#f43').hide();
+  $('#f34').hide();
+  $('#f14').hide();
+   $('#fin2').hide();
+  $('#fin3').hide();
+  $('#fin4').hide(); 
+$('#legendicon').hide();
+  ctx.strokeStyle="#000000";
+  ctx.font = "16px Georgia";
+  ctx.save();
+  ctx.lineWidth=2;
+  ctx.strokeText("Combination does not satisfy Grashof rule ",100,200);
+  ctx.restore();
+  }
+ /* if(document.getElementById("trace").checked==true)
+  {
+  pointtrace(ptx,pty,ctx,"blue",2);
+  pointdisp(p,ctx,2,'','','',true,1);
+  }
+  else
+  {
+  ptx=[];
+  pty=[];
+  }*/
+  
+ 
+}
+
+//function to draw velocity diagram
+function drawvel(ctx)
+{ 
+
+//Velocity Diagram
+  vo=pointtrans(vo,transV);
+  vba=pointtrans(vba,transV);
+  vca=pointtrans(vca,transV);
+  vcb=pointtrans(vcb,transV);
+ 
+  pointjoin(vo,vba,ctx,"#0066FF",2);
+  drawArrow(vba.xcoord,vba.ycoord,ctx,180-theta2-rotstatus*90,15,30,"#0066FF");
+
+  pointjoin(vba,vcb,ctx,"#D00000",2);
+  drawArrow(vcb.xcoord,vcb.ycoord,ctx,180-theta3-(signof(omega3))*90,15,30,"#D00000");
+
+  pointjoin(vo,vca,ctx,"#005500",2);
+  drawArrow(vca.xcoord,vca.ycoord,ctx,180-theta4-(signof(omega4))*90,15,30,"#005500");
+
+//positioning labels
+document.getElementById("vba").style.position = 'absolute';
+document.getElementById("vca").style.position = 'absolute';
+document.getElementById("vcb").style.position = 'absolute';
+document.getElementById("vba").style.margin = '0';
+document.getElementById("vca").style.margin = '0';
+document.getElementById("vcb").style.margin = '0';
+document.getElementById("vba").style.width = '20px';
+document.getElementById("vba").style.height = '20px';
+document.getElementById("vca").style.width = '20px';
+document.getElementById("vca").style.height = '20px';
+document.getElementById("vcb").style.width = '20px';
+document.getElementById("vcb").style.height = '20px';
+document.getElementById("vba").style.fontSize = '11px';
+document.getElementById("vca").style.fontSize = '11px';
+document.getElementById("vcb").style.fontSize = '11px';
+document.getElementById("vba").style.left = ""+(-10+Math.round(60+transV.xcoord+vba.xcoord)/2)+"px";
+document.getElementById("vba").style.top = ""+(-10+Math.round(200+transV.ycoord+vba.ycoord)/2)+"px";
+document.getElementById("vca").style.left = ""+(-10+Math.round(60+transV.xcoord+vcb.xcoord)/2)+"px";
+document.getElementById("vca").style.top = ""+(-10+Math.round(200+transV.ycoord+vcb.ycoord)/2)+"px";
+document.getElementById("vcb").style.left = ""+(-10+Math.round(60+vba.xcoord+vca.xcoord)/2)+"px";
+document.getElementById("vcb").style.top = ""+(-10+Math.round(200+vba.ycoord+vca.ycoord)/2)+"px";
+
+
+//displaying scale values
+if(flaggrashof)
+{
+ctx.save();
+   ctx.lineWidth=1;
+   ctx.font="12px 'Comic Sans MS'";
+   ctx.strokeStyle="#000000";
+
+  if(scaleV>=1)
+  ctx.strokeText("Velocity Diagram (Scale = 1:"+scaleV+")",350,50);
+  if(scaleV<1)
+  ctx.strokeText("Velocity Diagram (Scale = "+1/scaleV+":1)",350,50);
+
+ ctx.restore();
+}
+
+//drawacc(ctx);
+}
+
+//function to check whether links satisfy grashof condition
+function checkGrashof()
+{
+	var links= new Array(4);
+	links[0]=r1;
+	links[1]=r2;
+	links[2]=r3;
+	links[3]=r4;
+	links.sort(function(p, q){return p-q});
+	var s=links[0];
+	var p=links[1];
+	var q=links[2];
+	var l=links[3];
+	if (s+l>p+q)
+	{ 
+		flaggrashof=false;
+		
+	}
+	else 
+	{
+		flaggrashof=true;
+
+	}
+}
+
+function drawacc(context)
+{
+document.getElementById("datatable1").innerHTML="\
+<table>\
+<tr><th>Link</th><th>Length</th><th>&theta;</th><th>&omega;</th><th>V</th><th>&alpha;</th><th>A<sub>c</sub></th><th>A<sub>t</sub></th><th>A</th></tr>\
+<tr><td>r2</td><td>"+r2+"</td><td>"+roundd(theta2,2)+"</td><td>"+roundd(omega2,2)+"</td><td>"+roundd(r2*omega2,2)+"</td><td>"+roundd(alpha2,2)+"</td><td>"+roundd(acccb,2)+"</td><td>"+roundd(acctb,2)+"</td><td>"+roundd(acclb,2)+"</td></tr>\
+<tr><td>r3</td><td>"+r3+"</td><td>"+roundd(theta3,2)+"</td><td>"+roundd(omega3,2)+"</td><td>"+roundd(r3*omega3,2)+"</td><td>"+roundd(alpha3,2)+"</td><td>"+roundd(accccb,2)+"</td><td>"+roundd(acctcb,2)+"</td><td>"+roundd(acclcb,2)+"</td></tr>\
+<tr><td>r4</td><td>"+r4+"</td><td>"+roundd(theta4,2)+"</td><td>"+roundd(omega4,2)+"</td><td>"+roundd(r4*omega4,2)+"</td><td>"+roundd(alpha4,2)+"</td><td>"+roundd(acccc,2)+"</td><td>"+roundd(acctc,2)+"</td><td>"+roundd(acclc,2)+"</td></tr>\
+<tr><td>(Units)</td><td>mm</td><td>&deg;</td><td>rad/s</td><td>mm/s</td><td>rad/s<sup>2</sup></td><td>mm/s<sup>2</sup></td><td>mm/s<sup>2</sup></td><td>mm/s<sup>2</sup></td></tr>\
+</table>";
+
+//Acceleration Diagram
+  ao= pointtrans(ao,transA);
+  ab= pointtrans(ab,transA);
+  acb= pointtrans(acb,transA);
+  ac= pointtrans(ac,transA);
+  accb= pointtrans(accb,transA);
+  acc= pointtrans(acc,transA);
+  atcb= pointtrans(atcb,transA);
+  atc= pointtrans(atc,transA);
+
+  angcb=deg(Math.atan((acb.ycoord-ab.ycoord)/(acb.xcoord-ab.xcoord)));
+  angc=deg(Math.atan((ac.ycoord-ao.ycoord)/(ac.xcoord-ao.xcoord)));
+
+  pointjoin(ao,ab,context,"#0066FF",3);
+  drawArrow(ab.xcoord,ab.ycoord,context,-theta2,15,30,"#0066FF");
+
+  pointjoin(ab,accb,context,"#D00000",1);
+  drawArrow(accb.xcoord,accb.ycoord,context,-theta3,15,30,"#D00000");
+  
+  pointjoin(ab,acb,context,"#D00000",3);
+  drawArrow(acb.xcoord,acb.ycoord,context,270-(signof(acb.xcoord-ab.xcoord))*90+angcb,15,30,"#D00000");
+
+  pointjoin(ao,acc,context,"#005500",1);  
+  drawArrow(acc.xcoord,acc.ycoord,context,-theta4,15,30,"#005500");
+  
+  pointjoin(ao,ac,context,"#005500",3);  
+  drawArrow(ac.xcoord,ac.ycoord,context,270-(signof(ac.xcoord-ao.xcoord))*90+angc,15,30,"#005500");
+ /* context.moveTo(380,382);
+  context.lineTo(430,382);
+  context.stroke();*/
+
+  // dashed line for Tangential Accelerations
+  context.save();
+  context.beginPath();
+  context.setLineDash([5, 5]);
+  pointjoin(acc,atc,context,"#005500",1);  
+  drawArrow(atc.xcoord,atc.ycoord,context,-theta4+(signof(acctc))*90,15,30,"#005500");
+  pointjoin(accb,atcb,context,"#D00000",1);
+  drawArrow(atcb.xcoord,atcb.ycoord,context,-theta3+(signof(acctcb))*90,15,30,"#D00000");
+  context.closePath();
+  context.restore();
+
+//positioning labels
+document.getElementById("ab").style.position = 'absolute';
+document.getElementById("acb").style.position = 'absolute';
+document.getElementById("ac").style.position = 'absolute';
+document.getElementById("ab").style.margin = '0';
+document.getElementById("acb").style.margin = '0';
+document.getElementById("ac").style.margin = '0';
+document.getElementById("ab").style.width = '20px';
+document.getElementById("ab").style.height = '20px';
+document.getElementById("acb").style.width = '20px';
+document.getElementById("acb").style.height = '20px';
+document.getElementById("ac").style.width = '20px';
+document.getElementById("ac").style.height = '20px';
+document.getElementById("ab").style.fontSize = '11px';
+document.getElementById("acb").style.fontSize = '11px';
+document.getElementById("ac").style.fontSize = '11px';
+document.getElementById("ab").style.left = ""+(-10+Math.round(60+transA.xcoord+ab.xcoord)/2)+"px";
+document.getElementById("ab").style.top = ""+(-10+Math.round(200+transA.ycoord+ab.ycoord)/2)+"px";
+document.getElementById("ac").style.left = ""+(-10+Math.round(60+transA.xcoord+ac.xcoord)/2)+"px";
+document.getElementById("ac").style.top = ""+(-10+Math.round(200+transA.ycoord+ac.ycoord)/2)+"px";
+document.getElementById("acb").style.left = ""+(-10+Math.round(60+ab.xcoord+acb.xcoord)/2)+"px";
+document.getElementById("acb").style.top = ""+(-10+Math.round(200+ab.ycoord+acb.ycoord)/2)+"px";
+if(flaggrashof)
+{
+ctx.save();
+   ctx.lineWidth=1;
+   ctx.font="12px 'Comic Sans MS'";
+   ctx.strokeStyle="#000000";
+
+  if(scaleA>=1)
+  ctx.strokeText("Acceleration Diagram (Scale = 1:"+scaleA+")",225,300);
+  if(scaleA<1)
+  ctx.strokeText("Acceleration Diagram (Scale = "+1/scaleA+":1)",225,300);
+  ctx.restore();
+}
+/*
+if(scaleV>=1)
+printcomment("Scale of Velocity diagram = 1:"+scaleV,2);
+
+if(scaleV<1)
+printcomment("Scale of Velocity diagram = "+1/scaleV,2);
+*/
+
+/*document.getElementById("datatable2").innerHTML="<p>Crossed Configuration</p>\
+<table>\
+<tr><th>Angle</th><th>Value</th></tr>\
+<tr><td>&theta;<sub>2</sub></td><td>"+roundd(theta2,2)+"&deg;</td></tr>\
+<tr><td>&theta;<sub>3</sub></td><td>"+roundd(theta3dash,2)+"&deg;</td></tr>\
+<tr><td>&theta;<sub>4</sub></td><td>"+roundd(theta4dash,2)+"&deg;</td></tr>\
+<tr><td>&gamma;</td><td>"+roundd(gamma,2)+"&deg;</td></tr>\
+</table>"; // confirm why only gamma was being displayed in the flash simulation.
+*/
+}
+
+function drawaccl(context)
+{
+canvas = document.getElementById("simscreen");
+ctx = canvas.getContext("2d");
+ctx.clearRect(0,0,550,400);  //clears the complete canvas#simscreen everytime
+  if (flaggrashof)
+  { 
+  
+  $('#titleincanvas').show();
+  $('#datatable1').hide();
+  $('#datatable2').hide();
+  $('#datatable3').show();
+  $('#datatable4').hide();
+  $('#vba').hide();
+  $('#vcb').hide();
+  $('#vca').hide();
+  $('#ab').hide();
+  $('#acb').hide();
+  $('#ac').hide();
+  $('#f12').hide();
+  $('#f32').hide();
+  $('#f23').hide();
+  $('#f43').hide();
+  $('#f34').hide();
+  $('#f14').hide();
+   $('#fin2').hide();
+  $('#fin3').hide();
+  $('#fin4').hide(); 
+  //--------------------------------------
+  $('#acg2').show();
+  $('#acg3').show();
+  $('#acg4').show(); 
+  //........................................
+  ax=pointtrans(ax,trans1);
+  bx=pointtrans(bx,trans1);
+  cx=pointtrans(cx,trans1);
+  dx=pointtrans(dx,trans1);
+  //........................................
+  abcga=pointtrans(abcga,trans1);
+  bccga=pointtrans(bccga,trans1);
+  cdcga=pointtrans(cdcga,trans1);
+  //.........................................
+  abxcg=pointtrans(abxcg,trans1);
+  bcxcg=pointtrans(bcxcg,trans1);
+  cdxcg=pointtrans(cdxcg,trans1);
+  //.........................................
+
+
+document.getElementById('titleincanvas').innerHTML="Acceleration of CG";
+  pointjoin(ax,bx,ctx,"#0066FF");
+  pointjoin(bx,cx,ctx,"#D00000");
+  pointjoin(cx,dx,ctx,"#005500");
+  pointjoin(dx,ax,ctx,"#993300");
+ //pointjoin(a1,d1,ctx,"#993300");
+ /* pointjoin(a2,b2,ctx,"#0066FF");
+  pointjoin(b2,c2,ctx,"#D00000");
+-  pointjoin(c2,d2,ctx,"#005500");
+  pointjoin(d2,a2,ctx,"#993300");*/
+  pointdisp(ax,ctx);
+  pointdisp(bx,ctx);
+  pointdisp(cx,ctx);
+  pointdisp(dx,ctx);
+
+//Acceleration Vectors
+pointjoin(abxcg,abcga,ctx,"red",2);
+drawArrow(abcga.xcoord,abcga.ycoord,ctx,-abcgtheta+180,15,30,"red");
+pointjoin(bcxcg,bccga,ctx,"blue",2);
+drawArrow(bccga.xcoord,bccga.ycoord,ctx,-bccgtheta+180,15,30,"blue");
+pointjoin(cdxcg,cdcga,ctx,"blue",2);
+drawArrow(cdcga.xcoord,cdcga.ycoord,ctx,-cdcgtheta+180,15,30,"blue");
+//Acceleraation Labels
+
+document.getElementById("acg2").style.position = 'absolute';
+document.getElementById("acg2").style.margin = '0';
+document.getElementById("acg2").style.width = '20px';
+document.getElementById("acg2").style.height = '20px';;
+document.getElementById("acg2").style.fontSize = '11px';
+document.getElementById("acg2").style.left = ""+(Math.round(60+trans1.xcoord+abcga.xcoord)/2)+"px";
+document.getElementById("acg2").style.top = ""+(-10+Math.round(200+trans1.ycoord+abcga.ycoord)/2)+"px";
+
+document.getElementById("acg3").style.position = 'absolute';
+document.getElementById("acg3").style.margin = '0';
+document.getElementById("acg3").style.width = '20px';
+document.getElementById("acg3").style.height = '20px';
+document.getElementById("acg3").style.fontSize = '11px';
+document.getElementById("acg3").style.left =""+(-10+Math.round(100+trans1.xcoord+bccga.xcoord)/2)+"px";
+document.getElementById("acg3").style.top =""+(-10+Math.round(150+trans1.ycoord+bccga.ycoord)/2)+"px";
+
+document.getElementById("acg4").style.position = 'absolute';
+document.getElementById("acg4").style.margin = '0';
+document.getElementById("acg4").style.width = '20px';
+document.getElementById("acg4").style.height = '20px';
+document.getElementById("acg4").style.fontSize = '11px';
+document.getElementById("acg4").style.left =""+(-10+Math.round(200+trans1.xcoord+cdcga.xcoord)/2)+"px";
+document.getElementById("acg4").style.top =""+(-10+Math.round(150+trans1.ycoord+cdcga.ycoord)/2)+"px";
+
+//Datatable
+document.getElementById("datatable3").innerHTML="\
+<table>\
+<tr><th>Acceleration</th><th>A<sub>cg</sub>(mm/s<sup>2</sup>)</th>\
+<tr><td>A<sub>cg2x</sub></td><td>"+roundd(a2cgx,2)+"</td>\
+<tr><td>A<sub>cg2y</sub></td><td>"+roundd(a2cgy,2)+"</td>\
+<tr><td>A<sub>cg3x</sub></td><td>"+roundd(a3cgx,2)+"</td>\
+<tr><td>A<sub>cg3y</sub></td><td>"+roundd(a3cgy,2)+"</td>\
+<tr><td>A<sub>cg4x</sub></td><td>"+roundd(a4cgx,2)+"</td>\
+<tr><td>A<sub>cg4y</sub></td><td>"+roundd(a4cgy,2)+"</td>\
+</table>";
+// Position Diagram Title 
+
+if(flaggrashof)
+{
+  ctx.save();
+   ctx.lineWidth=1;
+   ctx.font="12px 'Comic Sans MS'";
+   ctx.strokeStyle="#000000";
+ //displaying scale values
+  if(scaleP>=1)
+  ctx.strokeText("Position Diagram (Scale = 2:"+scaleP+")",200,300);
+  if(scaleP<1)
+  ctx.strokeText("Position Diagram (Scale = 2:"+1/scaleP+":1)",200,300);
+
+ctx.restore();
+}
+   
+   
+/*  pointdisp(a2,ctx);
+  pointdisp(b2,ctx);
+  pointdisp(c2,ctx);
+  pointdisp(d2,ctx);*/
+  }
+  else
+  {
+  
+$('#titleincanvas').hide();
+$('#datatable1').hide();
+$('#datatable2').hide();
+$('#datatable3').hide();
+$('#datatable4').hide();
+//$('#datatable2').hide();
+  $('#vba').hide();
+  $('#vcb').hide();
+  $('#vca').hide();
+  $('#ab').hide();
+  $('#acb').hide();
+  $('#ac').hide();
+  $('#acg2').hide();
+  $('#acg3').hide();
+  $('#acg4').hide();
+  $('#f12').hide();
+  $('#f32').hide();
+  $('#f23').hide();
+  $('#f43').hide();
+  $('#f34').hide();
+  $('#f14').hide();
+  $('#fin2').hide();
+  $('#fin3').hide();
+  $('#fin4').hide(); 
+
+
+$('#legendicon').hide();
+  ctx.strokeStyle="#000000";
+  ctx.font = "16px Georgia";
+  ctx.save();
+  ctx.lineWidth=2;
+  ctx.strokeText("Combination does not satisfy Grashof rule ",100,200);
+  ctx.restore();
+  }
+}
+function drawforcemoment(ctx)
+{
+canvas = document.getElementById("simscreen");
+ctx = canvas.getContext("2d");
+ctx.clearRect(0,0,550,400);  //clears the complete canvas#simscreen everytime
+ if (flaggrashof)
+  { 
+  
+  $('#titleincanvas').show();
+  $('#datatable1').hide();
+  $('#datatable2').hide();
+  $('#datatable3').hide();
+  $('#datatable4').show();
+  $('#vba').hide();
+  $('#vcb').hide();
+  $('#vca').hide();
+  $('#ab').hide();
+  $('#acb').hide();
+  $('#ac').hide();
+  $('#f12').hide();
+  $('#f32').hide();
+  $('#f23').hide();
+  $('#f43').hide();
+  $('#f34').hide();
+  $('#f14').hide();
+    //--------------------------------------
+  $('#acg2').show();
+  $('#acg3').show();
+  $('#acg4').show();
+  //----------------------------------------
+  $('#fin2').show();
+  $('#fin3').show();
+  $('#fin4').show(); 
+  //----------------------------------------
+ax=pointtrans(ax,trans1);
+bx=pointtrans(bx,trans1);
+cx=pointtrans(cx,trans1);
+dx=pointtrans(dx,trans1);
+
+abcga=pointtrans(abcga,trans1);
+bccga=pointtrans(bccga,trans1);
+cdcga=pointtrans(cdcga,trans1);
+
+fin2=pointtrans(fin2,trans1);
+fin3=pointtrans(fin3,trans1);
+fin4=pointtrans(fin4,trans1);
+
+hf2=pointtrans(hf2,trans1);
+hf3=pointtrans(hf3,trans1);
+hf4=pointtrans(hf4,trans1);
+
+
+abxcg=pointtrans(abxcg,trans1);
+bcxcg=pointtrans(bcxcg,trans1);
+cdxcg=pointtrans(cdxcg,trans1);
+
+pointjoin(ax,bx,ctx,"#0066FF");
+pointjoin(bx,cx,ctx,"#D00000");
+pointjoin(cx,dx,ctx,"#005500");
+pointjoin(dx,ax,ctx,"#993300");
+
+pointdisp(ax,ctx);
+pointdisp(bx,ctx);
+pointdisp(cx,ctx);
+pointdisp(dx,ctx);
+
+
+//Acceleration Vectors
+
+pointjoin(abxcg,abcga,ctx,"red",2);
+drawArrow(abcga.xcoord,abcga.ycoord,ctx,-abcgtheta+180,15,30,"red");
+pointjoin(bcxcg,bccga,ctx,"blue",2);
+drawArrow(bccga.xcoord,bccga.ycoord,ctx,-bccgtheta+180,15,30,"blue");
+pointjoin(cdxcg,cdcga,ctx,"blue",2);
+drawArrow(cdcga.xcoord,cdcga.ycoord,ctx,-cdcgtheta+180,15,30,"blue");
+//Force vectors
+pointjoin(abxcg,fin2,ctx,"black",2);
+drawArrow(fin2.xcoord,fin2.ycoord,ctx,-fin2theta+180,15,30,"black");
+pointjoin(hf3,fin3,ctx,"black",2);
+drawArrow(fin3.xcoord,fin3.ycoord,ctx,-fin3theta+180,15,30,"black");
+pointjoin(hf4,fin4,ctx,"black",2);
+drawArrow(fin4.xcoord,fin4.ycoord,ctx,-fin4theta+180,15,30,"black");
+
+document.getElementById("acg2").style.position = 'absolute';
+document.getElementById("acg2").style.margin = '0';
+document.getElementById("acg2").style.width = '20px';
+document.getElementById("acg2").style.height = '20px';;
+document.getElementById("acg2").style.fontSize = '11px';
+document.getElementById("acg2").style.left = ""+(Math.round(60+trans1.xcoord+abcga.xcoord)/2)+"px";
+document.getElementById("acg2").style.top = ""+(-10+Math.round(200+trans1.ycoord+abcga.ycoord)/2)+"px";
+
+document.getElementById("acg3").style.position = 'absolute';
+document.getElementById("acg3").style.margin = '0';
+document.getElementById("acg3").style.width = '20px';
+document.getElementById("acg3").style.height = '20px';
+document.getElementById("acg3").style.fontSize = '11px';
+document.getElementById("acg3").style.left =""+(-10+Math.round(100+trans1.xcoord+bccga.xcoord)/2)+"px";
+document.getElementById("acg3").style.top =""+(-10+Math.round(150+trans1.ycoord+bccga.ycoord)/2)+"px";
+
+document.getElementById("acg4").style.position = 'absolute';
+document.getElementById("acg4").style.margin = '0';
+document.getElementById("acg4").style.width = '20px';
+document.getElementById("acg4").style.height = '20px';
+document.getElementById("acg4").style.fontSize = '11px';
+document.getElementById("acg4").style.left =""+(-10+Math.round(200+trans1.xcoord+cdcga.xcoord)/2)+"px";
+document.getElementById("acg4").style.top =""+(-10+Math.round(150+trans1.ycoord+cdcga.ycoord)/2)+"px";
+
+document.getElementById("fin2").style.position = 'absolute';
+document.getElementById("fin2").style.margin = '0';
+document.getElementById("fin2").style.width = '20px';
+document.getElementById("fin2").style.height = '20px';
+document.getElementById("fin2").style.fontSize = '11px';
+document.getElementById("fin2").style.left =""+(-10+Math.round(200+trans1.xcoord+fin2.xcoord)/2)+"px";
+document.getElementById("fin2").style.top =""+(-10+Math.round(150+trans1.ycoord+fin2.ycoord)/2)+"px";
+
+document.getElementById("fin3").style.position = 'absolute';
+document.getElementById("fin3").style.margin = '0';
+document.getElementById("fin3").style.width = '20px';
+document.getElementById("fin3").style.height = '20px';
+document.getElementById("fin3").style.fontSize = '11px';
+document.getElementById("fin3").style.left =""+(-10+Math.round(200+trans1.xcoord+fin3.xcoord)/2)+"px";
+document.getElementById("fin3").style.top =""+(-10+Math.round(150+trans1.ycoord+fin3.ycoord)/2)+"px";
+
+document.getElementById("fin4").style.position = 'absolute';
+document.getElementById("fin4").style.margin = '0';
+document.getElementById("fin4").style.width = '20px';
+document.getElementById("fin4").style.height = '20px';
+document.getElementById("fin4").style.fontSize = '11px';
+document.getElementById("fin4").style.left =""+(-10+Math.round(200+trans1.xcoord+fin4.xcoord)/2)+"px";
+document.getElementById("fin4").style.top =""+(-10+Math.round(150+trans1.ycoord+fin4.ycoord)/2)+"px";
+
+document.getElementById("datatable4").innerHTML="\
+<table>\
+<tr><th>Link</th><th>Offset</th>\
+<tr><td>2</td><td>"+0+"</td>\
+<tr><td>3</td><td>"+roundd(h3,2)+"</td>\
+<tr><td>4</td><td>"+roundd(h4,2)+"</td>\
+</table>";
+
+
+}
+else
+{
+  $('#vba').hide();
+  $('#vcb').hide();
+  $('#vca').hide();
+  $('#ab').hide();
+  $('#acb').hide();
+  $('#ac').hide();
+  $('#acg2').hide();
+  $('#acg3').hide();
+  $('#acg4').hide();
+  $('#datatable1').hide();
+  $('#datatable2').hide();
+  $('#datatable3').hide();
+  $('#datatable4').hide();
+  $('#f12').hide();
+  $('#f32').hide();
+  $('#f23').hide();
+  $('#f43').hide();
+  $('#f34').hide();
+  $('#f14').hide();
+  $('#acg2').hide();
+  $('#acg3').hide();
+  $('#acg4').hide();
+  $('#fin2').hide();
+  $('#fin3').hide();
+  $('#fin4').hide();
+  $('#legendicon').hide();
+  ctx.strokeStyle="#000000";
+  ctx.font = "16px Georgia";
+  ctx.save();
+  ctx.lineWidth=2;
+  ctx.strokeText("Combination does not satisfy Grashof rule ",100,200);
+  ctx.restore();
+  }
+
+
+}
+//Experimental Function
+
+function bendingstressanalysis_pointjoin(a,b,f1,f2,r,theta,n,m,acgx,acgy,context,p,q,trans)
+{
+	var l1,l1x,l1y,M1,M2,Mcg,l2,l2x,l2y,lcg,lcgx,lcgy;
+
+	var M=[];
+	var bf1=[];
+	var bf2=[];
+
+	//Boundary Conditions
+	for (var i = 0; i <= n; i++) 
+	{ M1=0;
+		M2=0;
+		Mcg=0;
+		//Calculation of moment due to force 1
+		l1=((2*i-1)/(2*n))*r;
+		l1x=l1*Math.cos(rad(theta));
+		l1y=l1*Math.sin(rad(theta));
+		M1=(f1.xcoord*l1y)-(f1.ycoord*l1x);
+	    //Calculation of moment due to force 2
+		l2=(((2*n)-(2*i)-1)/(2*n))*r;
+		l2x=l2*Math.cos(rad(theta));
+		l2y=l2*Math.sin(rad(theta));
+		M2=(f2.ycoord*l2x)-(f2.xcoord*l2y);
+		//Calculation of moment due to inertia forces
+		lcg=((n-(2*i)-1)/2*n)*r;
+		lcgx=lcg*Math.cos(rad(theta));
+		lcgy=lcg*Math.sin(rad(theta));
+		Mcg=(m*acgx*lcgy)-(m*acgy*lcgx);
+		//Total Moment
+		M[i]=M1+M2+Mcg;
+		//Assuming a rectangular cross section (1X16) Crosssection 
+		//Material Aluminium
+		bf1[i]= M[i]*0.0234;
+		bf2[i]= M[i]*(-0.0234);
+	}
+	for(i=0;i<n;i++)
+		//Meshing
+
+	{  
+		p[i]= new point(0,0,"");
+		p[i]=pointtrans(p[i],trans);
+		p[i].xcoord=b.xcoord+(4*Math.sin(rad(-theta)))-(((i*r)/n)*Math.cos(rad(theta)));
+		p[i].ycoord=b.ycoord-(4*Math.cos(rad(theta)))-(((i*r)/n)*Math.sin(rad(-theta)));
+
+		p[i+1]= new point(0,0,"");
+		p[i+1]=pointtrans(p[i+1],trans);
+		p[i+1].xcoord=b.xcoord+(4*Math.sin(rad(-theta)))-(((i+1)*r)/n)*Math.cos(rad(theta));
+		p[i+1].ycoord=b.ycoord-(4*Math.cos(rad(theta)))-(((i+1)*r)/n)*Math.sin(rad(-theta));
+
+		colourcontour(p[i],p[i+1],bf1[i]);
+
+
+		q[i]= new point(0,0,"");
+		q[i]=pointtrans(q[i],trans);
+		q[i].xcoord=b.xcoord-(4*Math.sin(rad(-theta)))-(((i*r)/n)*Math.cos(rad(theta)));
+		q[i].ycoord=b.ycoord+(4*Math.cos(rad(theta)))-(((i*r)/n)*Math.sin(rad(-theta)));
+
+		q[i+1]= new point(0,0,"");
+		q[i+1]=pointtrans(q[i+1],trans);
+		q[i+1].xcoord=b.xcoord-(4*Math.sin(rad(-theta)))-(((i+1)*r)/n)*Math.cos(rad(theta));
+		q[i+1].ycoord=b.ycoord+(4*Math.cos(rad(theta)))-(((i+1)*r)/n)*Math.sin(rad(-theta));
+		colourcontour(q[i],q[i+1],bf2[i]);
+	}
+}
+
+
+//Colour Mapping Function
+
+function colourcontour(p,q,bf)
+{
+	    if(bf<-700 && bf>=-1400)
+		{
+			x=((bf+1400)/(700))*255;
+			x=roundd(x,0);
+			pointjoin(p,q,ctx,"rgb(0,"+x+",0)",8);
+		}
+		if(bf<0 && bf>=-700)
+		{
+			x=((bf+700)/(700))*255;
+			x=roundd(x,0);
+			x=255-x;
+			pointjoin(p,q,ctx,"rgb(0,255,"+x+")",8);
+		}
+		if(bf<700 && bf>=0)
+		{
+			x=((bf)/(700))*255;
+			x=roundd(x,0);
+			pointjoin(p,q,ctx,"rgb("+x+",255,0)",8);
+		}
+		if(bf<1400 && bf>=700)
+		{
+			x=((bf-700)/(700))*255;
+			x=roundd(x,0);
+			x=255-x;
+			pointjoin(p,q,ctx,"rgb(255,"+x+",0)",8);
+		}
+}
+
+function drawdyn(context)
+{
+  canvas = document.getElementById("simscreen");
+  ctx = canvas.getContext("2d");
+  ctx.clearRect(0,0,550,400);  //clears the complete canvas#simscreen everytime
+ //clears the complete canvas#simscreen everytime
+  if(checkGrashof)
+{
+  draw(ctx);
+
+  $('#vba').hide();
+  $('#vcb').hide();
+  $('#vca').hide();
+  $('#ab').hide();
+  $('#acb').hide();
+  $('#ac').hide();
+  $('#acg2').hide();
+  $('#acg3').hide();
+  $('#acg4').hide();
+  $('#datatable1').hide();
+  $('#datatable2').show();
+  $('#datatable3').hide();
+  $('#f12').show();
+  $('#f32').show();
+  $('#f23').show();
+  $('#f43').show();
+  $('#f34').show();
+  $('#f14').show();
+  $('#acg2').hide();
+  $('#acg3').hide();
+  $('#acg4').hide();
+  $('#fin2').hide();
+  $('#fin3').hide();
+  $('#fin4').hide();
+
+
+document.getElementById("datatable2").innerHTML="\
+<table>\
+<tr><th>Force</th><th>Value(N)</th></tr>\
+<tr><th>F12x</th><th>"+roundd($result[0],4)+"</tr>\
+<tr><th>F12y</th><th>"+roundd($result[1],4)+"</th></tr>\
+<tr><th>F32x</th><th>"+roundd($result[2],4)+"</th></tr>\
+<tr><th>F32y</th><th>"+roundd($result[3],4)+"</th></tr>\
+<tr><th>F43x</th><th>"+roundd($result[4],4)+"</th></tr>\
+<tr><th>F43y</th><th>"+roundd($result[5],4)+"</th></tr>\
+<tr><th>F14x</th><th>"+roundd($result[6],4)+"</th></tr>\
+<tr><th>F14y</th><th>"+roundd($result[7],4)+"</th></tr>\
+<tr><th>T12</th><th>"+roundd($result[8],4)+"</th></tr>\
+</table>";  
+  ctx.strokeText("Forces on Link 2 (Scale = 1)",330,10);
+  ctx.strokeText("Force on Link 3 (Scale = 1)",100,200);
+  ctx.strokeText("Forces on Link 4 (Scale = 1)",300,200);
+
+
+  
+//Dynamic Force Analysis Free Body Diagrams
+
+//Link 2
+al2=pointtrans(al2,transl2);
+bl2=pointtrans(bl2,transl2);
+f12=pointtrans(f12,transl2);
+f32=pointtrans(f32,transl2);
+abcg=pointtrans(abcg,transl2);
+fcg2=pointtrans(fcg2,transl2);
+
+//Force Coordinates Link2
+pointjoin(al2,bl2,ctx,"blue");
+pointdisp(al2,ctx);
+pointdisp(bl2,ctx);
+pointjoin(al2,f12,ctx,"brown",2);
+pointjoin(bl2,f32,ctx,"red",2);
+pointjoin(bl2,f32,ctx,"red",2);
+//pointjoin(abcg,fcg2,ctx,"red",2);
+
+drawArrow(f12.xcoord,f12.ycoord,ctx,-f12theta+180,15,30,"brown");
+drawArrow(f32.xcoord,f32.ycoord,ctx,-f32theta+180,15,30,"red");
+
+//Positioning Labels
+document.getElementById("f12").style.position = 'absolute';
+document.getElementById("f12").style.margin = '0';
+document.getElementById("f12").style.width = '20px';
+document.getElementById("f12").style.height = '20px';
+document.getElementById("f12").style.fontSize = '11px';
+document.getElementById("f12").style.left = ""+(f12.xcoord+30)+"px";
+document.getElementById("f12").style.top = ""+(transl2.ycoord+f12.ycoord)+"px";
+
+document.getElementById("f32").style.position = 'absolute';
+document.getElementById("f32").style.margin = '0';
+document.getElementById("f32").style.width = '0px';
+document.getElementById("f32").style.height = '0px';
+document.getElementById("f32").style.fontSize = '11px';
+document.getElementById("f32").style.left = ""+(f32.xcoord+30)+"px";
+document.getElementById("f32").style.top = ""+(transl2.ycoord+f32.ycoord)+"px";
+//Link 3
+bl3=pointtrans(bl3,transl3);
+cl3=pointtrans(cl3,transl3);
+f23=pointtrans(f23,transl3);
+f43=pointtrans(f43,transl3);
+//Force Coordinates Link 3
+pointjoin(bl3,cl3,ctx,"red");
+pointdisp(bl3,ctx);
+pointdisp(cl3,ctx);
+pointjoin(bl3,f23,ctx,"brown",2);
+pointjoin(cl3,f43,ctx,"green",2);
+drawArrow(f23.xcoord,f23.ycoord,ctx,-f23theta+180,15,30,"blue");
+drawArrow(f43.xcoord,f43.ycoord,ctx,-f43theta+180,15,30,"blue");
+
+//Positioning Labels
+document.getElementById("f23").style.position = 'absolute';
+document.getElementById("f23").style.margin = '0';
+document.getElementById("f23").style.width = '20px';
+document.getElementById("f23").style.height = '20px';;
+document.getElementById("f23").style.fontSize = '11px';
+document.getElementById("f23").style.left = ""+(f23.xcoord+30)+"px";
+document.getElementById("f23").style.top = ""+(f23.ycoord+100)+"px";
+
+document.getElementById("f43").style.position = 'absolute';
+document.getElementById("f43").style.margin = '0';
+document.getElementById("f43").style.width = '20px';
+document.getElementById("f43").style.height = '20px';;
+document.getElementById("f43").style.fontSize = '11px';
+document.getElementById("f43").style.left = ""+(f43.xcoord+30)+"px";
+document.getElementById("f43").style.top = ""+(f43.ycoord+100)+"px";
+
+//Link 4
+cl4=pointtrans(cl4,transl4);
+dl4=pointtrans(dl4,transl4);
+f34=pointtrans(f34,transl4);
+f14=pointtrans(f14,transl4);
+//Force Coordinates Link 4
+pointjoin(cl4,dl4,ctx,"green");
+pointdisp(cl4,ctx);
+pointdisp(dl4,ctx);
+pointjoin(cl4,f34,ctx,"brown",2);
+pointjoin(dl4,f14,ctx,"green",2);
+drawArrow(f34.xcoord,f34.ycoord,ctx,-f34theta+180,15,30,"blue");
+drawArrow(f14.xcoord,f14.ycoord,ctx,-f14theta+180,15,30,"blue");
+//Positioning variables
+
+document.getElementById("f14").style.position = 'absolute';
+document.getElementById("f14").style.margin = '0';
+document.getElementById("f14").style.width = '20px';
+document.getElementById("f14").style.height = '20px';
+document.getElementById("f14").style.fontSize = '11px';
+document.getElementById("f14").style.left = ""+(f14.xcoord+30)+"px";
+document.getElementById("f14").style.top = ""+(f14.ycoord+100)+"px";
+
+document.getElementById("f34").style.position = 'absolute';
+document.getElementById("f34").style.margin = '0';
+document.getElementById("f34").style.width = '20px';
+document.getElementById("f34").style.height = '20px';
+document.getElementById("f34").style.fontSize = '11px';
+document.getElementById("f34").style.left = ""+(f34.xcoord+30)+"px";
+document.getElementById("f34").style.top = ""+(f34.ycoord+100)+"px";
+}
+else
+{
+
+  $('#vba').hide();
+  $('#vcb').hide();
+  $('#vca').hide();
+  $('#ab').hide();
+  $('#acb').hide();
+  $('#ac').hide();
+  $('#acg2').hide();
+  $('#acg3').hide();
+  $('#acg4').hide();
+  $('#datatable1').hide();
+  $('#datatable2').hide();
+  $('#datatable3').hide();
+  $('#datatable4').hide();
+  $('#f12').hide();
+  $('#f32').hide();
+  $('#f23').hide();
+  $('#f43').hide();
+  $('#f34').hide();
+  $('#f14').hide();
+  $('#acg2').hide();
+  $('#acg3').hide();
+  $('#acg4').hide();
+  $('#fin2').hide();
+  $('#fin3').hide();
+  $('#fin4').hide();
+  $('#legendicon').hide();
+  ctx.strokeStyle="#000000";
+  ctx.font = "16px Georgia";
+  ctx.save();
+  ctx.lineWidth=2;
+  ctx.strokeText("Combination does not satisfy Grashof rule ",100,200);
+  ctx.restore();
+  }
+
+
+}
+// prints comments passed as 'commenttext' in location specified by 'commentloc' in the comments box;
+// 0 : Single comment box, 1 : Left comment box, 2 : Right comment box
+function printcomment(commenttext,commentloc)
+{
+  if(commentloc==0)
+  {
+  document.getElementById('commentboxright').style.visibility='hidden';
+  
+  }
+  else if(commentloc==1)
+  {
+  document.getElementById('commentboxright').style.visibility='visible'     ;
+   document.getElementById('commentboxleft').style.width='285px';
+  document.getElementById('commentboxleft').innerHTML = commenttext;
+
+  }
+  else if(commentloc==2)
+  {
+  document.getElementById('commentboxright').style.visibility='visible';
+  document.getElementById('commentboxright').innerHTML = commenttext;
+  }
+  else
+  {
+  document.getElementById('commentboxright').style.visibility='hidden';
+  document.getElementById('commentboxleft').style.width='570px';
+  document.getElementById('commentboxleft').innerHTML = "<center>please report this issue to adityaraman@gmail.com</center>"; 
+  // ignore use of deprecated tag <center> . Code is executed only if printcomment function receives inappropriate commentloc value
+  }
+}
+
+</script>
+
+</head>
+
+<body onload="editcss(); startsim(); varinit();">
+
+<!-- DND-Verifying JavaScript is enabled in browser -->
+<noscript>
+The simulation requires JavaScript to be enabled.
+</noscript>
+
+<!-- 
+Author : Sai Aditya Raman 
+send an email to adityaraman09@gmail.com for any communication
+-->
+
+<!-- Defining Container for Simulation -->
+<div id="container">
+
+<!-- Replace TITLE with simulation title to be displayed next to logo-->
+<div id="simtitle">Dynamics of Four Bar Mechanism</div>
+
+<!-- Region for simulation display -->
+<canvas id="simscreen" height="400px" width="550px"></canvas>
+
+<p id="vba">V<sub>ba</sub></p>
+<p id="vcb">V<sub>cb</sub></p>
+<p id="vca">V<sub>ca</sub></p>
+<p id="ab">A<sub>b</sub></p>
+<p id="acb">A<sub>cb</sub></p>
+<p id="ac">A<sub>c</sub></p>
+<p id="acg2">A<sub>cg2</sub></p>
+<p id="acg3">A<sub>cg3</sub></p>
+<p id="acg4">A<sub>cg4</sub></p>
+<p id="f12">F<sub>12</sub></p>
+<p id="f32">F<sub>32</sub></p>
+<p id="f23">F<sub>23</sub></p>
+<p id="f43">F<sub>43</sub></p>
+<p id="f34">F<sub>34</sub></p>
+<p id="f14">F<sub>14</sub></p>
+<p id="fin2">F<sub>in2</sub></p>
+<p id="fin3">F<sub>in3</sub></p>
+<p id="fin4">F<sub>in4</sub></p>
+<div id="titleincanvas"></div>
+<div id="datatable1" class="datatable"></div>
+<div id="datatable2" class="datatable"></div>
+<div id="datatable3" class="datatable"></div>
+<div id="datatable4" class="datatable"></div>
+
+<!-- Equation Reference and Legend for Graphs etc 
+<div id="quickreficon" title="Equations" onclick="showEquations();"></div>
+<div id="quickref"><img id="quickrefimg" src="sins/tick.png"></img></div>
+-->
+<div id="legendicon" title="Legend" onclick="showLegend();"></div>
+<div id="legend"><img id="legendimg" src="sins/legend4BARacc.png"></img></div>
+
+<!-- Region for comment / question prompts -->
+<div id="commentboxleft"></div>
+<div id="commentboxright"></div>
+
+<!-- DND-Title of region for variables display --> 
+<div id="vartitle">VARIABLES</div>
+
+<!-- Region for Input parameters of simulation -->
+<div id="variables">
+<!-- System variable input from user through slider and spinner jQuery widgets 
+repeat block with new variable name and new id for widgets-->
+<div id = "linklenght" div class="variable">
+<div class="varname"><p title="Link Length">r1 (mm)</p>
+<input id="r1spinner"></input></div>
+<div id="r1slider"></div>
+</div>
+
+
+<div id = "linklenght1" div class="variable">
+<div class="varname"><p title="Link Length">r2 (mm)</p>
+<input id="r2spinner"></input></div>
+<div id="r2slider"></div>
+</div>
+
+<div id = "linklenght2" div class="variable">
+<div class="varname"><p title="Link Length">r3 (mm)</p>
+<input id="r3spinner"></input></div>
+<div id="r3slider"></div>
+</div>
+
+<div id = "linklenght3" div class="variable">
+<div class="varname"><p title="Link Length">r4 (mm)</p>
+<input id="r4spinner"></input></div>
+<div id="r4slider"></div>
+</div>
+
+<div id = "linkmass" div class="variable">
+<div class="varname"><p title="Link mass">m2 (kg)</p>
+<input id="m2spinner"></input></div>
+<div id="m2slider"></div>
+</div>
+
+<div id = "linkmass1" div class="variable">
+<div class="varname"><p title="Link mass">m3 (kg)</p>
+<input id="m3spinner"></input></div>
+<div id="m3slider"></div>
+</div>
+
+<div id = "linkmass2" div class="variable">
+<div class="varname"><p title="Link mass">m4 (kg)</p>
+<input id="m4spinner"></input></div>
+<div id="m4slider"></div>
+</div>
+
+
+<div id = "t4" div class="variable">
+<div class="varname"><p title="Link mass">T4(Nm)</p>
+<input id="t4spinner"></input></div>
+<div id="t4slider"></div>
+</div>
+
+
+<div id = "theta2set" class="variable">
+<div class="varname"><p title='Input Angle'>&theta;<sub>2</sub> (&deg;) </p>
+<input id="theta2spinner"></input></div>
+<div id="theta2slider"></div>
+</div>
+
+<div id = "omega2set" class="variable">
+<div class="varname"><p title='Input Angular Velocity'>&omega;<sub>2</sub> (rad/s) </p>
+<input id="omega2spinner"></input></div>
+<div id="omega2slider"></div>
+</div>
+</div>
+
+<!-- DND-Title of region for controls display -->
+<div id="ctrltitle">CONTROLS</div>
+
+<!-- Region for User controls of simulation -->
+<div id="controls">
+<img id="playpausebutton" onclick="simstate()" src="sins/bluepausedull.png" />
+<img id="rotationbutton" onclick="rotstate()" src="sins/bluecwdull.png" />
+<img id="tabchangeforward" onclick="tabchangef()" src="sins/bluefwddulls.png" />
+<img id="tabchangebackward" onclick="tabchangeb()" src="sins/bluebkdullsbw.png" />
+<img id="screenchangesforward" onclick="screenchangef()" src="sins/bluefwddulls.png" />
+<img id="screenchangesbackward" onclick="screenchangeb()" src="sins/bluebkdullsbw.png" />
+
+<!--
+<div class="usercheck">
+<!-- Point tracing
+<input type="checkbox" id="trace" ></input> <p>Trace Mid Point</p>
+<!-- Reset Parameters
+<input type="button" id="resetparams" value="Reset" onclick="varinit();"></input> -->
+</div>
+
+
+
+<!-- DND-Copyright display-->
+<div id="copyright" title="Developer : SOLVEr"> Copyright &copy; SOLVE The Virtual Lab @ NITK Surathkal </div>
+
+</div><!-- Container div close -->
+
+<!-- For trials during development
+write in trythis() function the outputs that you want to check.
+<input type='button' onclick='trythis()' value="try me"></input> 
+-->
+</body>
+</html>
