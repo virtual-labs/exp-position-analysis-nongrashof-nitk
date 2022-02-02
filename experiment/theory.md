@@ -14,6 +14,7 @@
 A four bar mechanism consists of four rigid link which are linked in the form of quadrilateral by four pin joints. A link that makes complete revolution is called crank, the link opposite to the fixed link is the coupler and forth link is a lever or rocker if oscillates or another crank if rotates.</p>
 
 ![img](./images/pos1.png)
+
 Figure 1: Four bar mechanism
 
 ### Position Analysis of Four Bar Mechanism
