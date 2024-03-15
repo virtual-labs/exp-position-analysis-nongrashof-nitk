@@ -1,0 +1,657 @@
+/* rem and em don not depend on html font size in media queries, Instead 1rem = 1em = 16px
+rem: root font size
+em:current font size
+*/
+
+/* *************only screen******* */
+
+/* **************************** */
+/* Below 1344px (Smaller Desktops) */
+/* **************************** */
+
+@media (min-width: 1200px) {
+  canvas#simscreen {
+    width: 100%;
+    height: 56%;
+    margin-left: 50%;
+    top: 0;
+  }
+
+  div#commentboxleft {
+    position: absolute;
+    left: 9px;
+    top: 403px;
+    height: 65px;
+    width: 285px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    font-family: "Nunito", sans-serif;
+  }
+
+  div#commentboxright {
+    position: absolute;
+    left: 393px;
+    top: 415px;
+    height: 65px;
+    width: 183px;
+    text-align: right;
+    font-size: 16px;
+    font-family: "Nunito", sans-serif;
+    line-height: 15px;
+  }
+
+  #canvas-container {
+    /* margin-left: 160px; */
+    align-items: center;
+    width: 132%;
+  }
+  .datatable {
+    width: 141px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .datatable table {
+    border: 1px solid #000011;
+    border-collapse: collapse;
+    width: 120px;
+  }
+  #datatable1 {
+    left: 175px;
+    top: 232px;
+  }
+  #datatable1 p {
+    font-size: 14px;
+  }
+
+  #datatable2 {
+    left: 445px;
+    top: 232px;
+  }
+  #datatable2 p {
+    font-size: 13px;
+  }
+  #titleincanvas {
+    position: absolute;
+    left: 222px;
+    top: 42px;
+  }
+
+  #variables {
+    width: 201%;
+  }
+}
+
+/* **************************** */
+/* Below 1200px (Lanscape Tablets) */
+/* **************************** */
+
+@media (max-width: 75em) {
+  canvas#simscreen {
+    width: 100%;
+    height: 56%;
+    left: 0;
+    top: 0;
+  }
+  body {
+    width: 100%;
+    margin: unset;
+  }
+
+  .title-div h1 {
+    font-size: 2.5rem;
+  }
+  .task-title {
+    font-size: 2rem;
+  }
+  .tool-menu {
+    font-size: 2rem;
+  }
+  .icons {
+    width: 3rem;
+    height: 3rem;
+  }
+  .ctrl-icons {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .tool-list span {
+    font-size: 1.2rem;
+  }
+  .canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .div__control img {
+    width: 3rem;
+    height: 2.8rem;
+  }
+
+  div#commentboxleft {
+    position: absolute;
+    left: 8px;
+    top: 410px;
+    height: 65px;
+    width: 285px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    font-family: "Nunito", sans-serif;
+  }
+
+  div#commentboxright {
+    position: absolute;
+    left: 644px;
+    top: 394px;
+    height: 65px;
+    width: 132px;
+    text-align: right;
+    font-size: 16px;
+    font-family: "Nunito", sans-serif;
+  }
+  #canvas-container {
+    margin-left: 170px;
+  }
+  .datatable {
+    width: 140px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .datatable table {
+    border: 1px solid #000011;
+    border-collapse: collapse;
+    width: 120px;
+  }
+  #datatable1 {
+    left: 203px;
+    top: 246px;
+  }
+
+  #datatable2 {
+    left: 442px;
+    top: 247px;
+  }
+
+  #titleincanvas {
+    position: absolute;
+    left: 320px;
+    top: 47px;
+  }
+  .tool-list span {
+    font-size: 1.2rem;
+  }
+  #variables {
+    width: 201%;
+  }
+}
+
+/* **************************** */
+/* Below 944px ( Tablets) */
+/* **************************** */
+
+@media (max-width: 59em) {
+  canvas#simscreen {
+    width: 80%;
+    height: 51%;
+    left: 0;
+    top: 0;
+  }
+  .tool-link:link,
+  .tool-link:visited {
+    gap: 0.5rem;
+    font-size: 1.4rem;
+    flex-direction: column;
+  }
+
+  .title-div h1 {
+    font-size: 2rem;
+  }
+
+  .main__task-div {
+    height: auto;
+  }
+
+  .sidebar {
+    position: fixed;
+    padding: 0;
+    bottom: 0;
+    left: 0;
+    flex-direction: row;
+    width: 100%;
+    backdrop-filter: blur(10rem);
+    z-index: 101;
+    justify-content: space-evenly;
+    border-radius: 0;
+    scroll-behavior: auto;
+  }
+  .tool-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    font-size: 2.4rem;
+    justify-content: space-evenly;
+    padding: 1rem;
+  }
+  .main-section {
+    grid-template-columns: 1fr;
+  }
+  .logo-div {
+    width: 6.5rem;
+  }
+  .icons {
+    width: 3rem;
+    height: 3rem;
+  }
+  .main__task-div:nth-child(4) {
+    margin-bottom: 6rem;
+  }
+
+  .main-section {
+    grid-template-columns: 1fr;
+  }
+  .canvas__div {
+    grid-template-columns: 1fr;
+  }
+  .canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-top: 1px solid rgba(177, 176, 176, 0.855);
+  }
+
+  div#commentboxleft {
+    position: absolute;
+    left: 18px;
+    top: 398px;
+    height: 65px;
+    width: 285px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    font-family: "Nunito", sans-serif;
+  }
+
+  div#commentboxright {
+    position: absolute;
+    left: 607px;
+    top: 401px;
+    height: 65px;
+    width: 128px;
+    text-align: right;
+    font-size: 16px;
+    font-family: "Nunito", sans-serif;
+  }
+  #canvas-container {
+    margin-left: 10px;
+  }
+  .datatable {
+    width: 140px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .datatable table {
+    border: 1px solid #000011;
+    border-collapse: collapse;
+    width: 120px;
+  }
+  #datatable1 {
+    left: 166px;
+    top: 231px;
+  }
+  #datatable1 p {
+    margin-bottom: 5px;
+  }
+
+  #datatable2 {
+    left: 620px;
+    top: 235px;
+  }
+  #datatable2 p {
+    margin-bottom: 5px;
+  }
+  #titleincanvas {
+    position: absolute;
+    left: 351px;
+    top: 47px;
+  }
+  p {
+    margin-bottom: 70px;
+  }
+
+  #variables {
+    width: 100%;
+  }
+}
+
+/* **************************** */
+/* Below 820px (Smaller Tablets) */
+/* **************************** */
+@media (max-width: 52em) {
+  canvas#simscreen {
+    width: 100%;
+    height: 56%;
+    left: 0;
+    top: 0;
+  }
+
+  .main-section {
+    grid-template-columns: 1fr;
+  }
+  .canvas__div {
+    grid-template-columns: 1fr;
+  }
+  .canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-top: 1px solid rgba(177, 176, 176, 0.855);
+  }
+  div#commentboxleft {
+    position: absolute;
+    left: 18px;
+    top: 407px;
+    height: 65px;
+    width: 285px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    font-family: "Nunito", sans-serif;
+  }
+
+  div#commentboxright {
+    position: absolute;
+    left: 506px;
+    top: 410px;
+    height: 65px;
+    width: 129px;
+    text-align: right;
+    line-height: 20px;
+    font-size: 16px;
+    font-family: "Nunito", sans-serif;
+  }
+
+  .datatable {
+    width: 140px;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .datatable table {
+    border: 1px solid #000011;
+    border-collapse: collapse;
+    width: 120px;
+  }
+  #datatable1 {
+    left: 124px;
+    top: 242px;
+  }
+
+  #datatable2 {
+    left: 521px;
+    top: 241px;
+  }
+
+  #variables {
+    width: 100%;
+  }
+  .tool-list span {
+    font-size: 1.6rem;
+  }
+  #titleincanvas {
+    position: absolute;
+    left: 272px;
+    top: 47px;
+  }
+}
+
+/* **************************** */
+/* Below 704px (Smaller Tablets) */
+/* **************************** */
+@media (max-width: 44em) {
+  canvas#simscreen {
+    width: 100%;
+    height: 56%;
+    left: 0;
+    top: 0;
+  }
+
+  .canvas__div {
+    grid-template-columns: 1fr;
+  }
+  .img-div {
+    flex-direction: column;
+  }
+  .title-div {
+    gap: 0rem;
+    text-align: center;
+  }
+  .round {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+  .logo-div {
+    width: 6.5rem;
+    /* padding: 0.8rem 0 0.8rem 3.3rem; */
+  }
+  .main__task-div:nth-child(4) {
+    margin-bottom: 6rem;
+  }
+  .circuit-dia {
+    width: 40%;
+  }
+  .cross-img {
+    width: 60%;
+  }
+  .canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-top: 1px solid rgba(177, 176, 176, 0.855);
+  }
+
+  div#commentboxleft {
+    position: absolute;
+    left: 9px;
+    top: 409px;
+    height: 65px;
+    width: 285px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    font-family: "Nunito", sans-serif;
+  }
+
+  div#commentboxright {
+    position: absolute;
+    left: 358px;
+    top: 410px;
+    height: 65px;
+    width: 134px;
+    text-align: right;
+    line-height: 19px;
+    font-size: 16px;
+    font-family: "Nunito", sans-serif;
+  }
+  .datatable {
+    width: 140px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .datatable table {
+    border: 1px solid #000011;
+    border-collapse: collapse;
+    width: 120px;
+  }
+
+  #datatable1 {
+    left: 88px;
+    top: 254px;
+  }
+
+  #datatable2 {
+    left: 379px;
+    top: 254px;
+  }
+
+  #titleincanvas {
+    position: absolute;
+    left: 195px;
+    top: 47px;
+  }
+
+  #variables {
+    width: 100%;
+  }
+  #canvas-container {
+    margin-left: 0;
+  }
+}
+
+/* **************************** */
+/* Below 540px (Smaller Tablets) */
+/* **************************** */
+@media (max-width: 34em) {
+  canvas#simscreen {
+    width: 83%;
+    height: 56%;
+    left: 0;
+    top: 0;
+  }
+  .container {
+    /* padding: 0.5rem; */
+    gap: 1rem;
+  }
+  .logo-div {
+    width: 4rem;
+  }
+  .title-div h1 {
+    padding: 0.2rem;
+    font-size: 1.8rem;
+  }
+  .div__control {
+    gap: 2rem;
+  }
+  .ctrl-icons {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .task-title {
+    font-size: 1.7rem;
+  }
+  label,
+  select,
+  input,
+  p {
+    display: inline-block;
+    font-size: 1.5rem;
+  }
+  .main {
+    gap: 0.5rem;
+  }
+  .main-section {
+    gap: 0.5rem;
+  }
+  .sidebar {
+    border-radius: 0;
+  }
+  .canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-top: 1px solid rgba(177, 176, 176, 0.855);
+  }
+  .div__control img {
+    width: 2.7rem;
+    height: 2.5rem;
+  }
+  .tooltip {
+    font-size: 1rem;
+  }
+  div#commentboxleft {
+    position: absolute;
+    left: 4px;
+    top: 442px;
+    height: 65px;
+    width: 285px;
+    text-align: left;
+    font-size: 13.5px;
+    font-weight: normal;
+    font-family: "Nunito", sans-serif;
+  }
+
+  div#commentboxright {
+    position: absolute;
+    left: 197px;
+    top: 442px;
+    height: 36px;
+    width: 95px;
+    text-align: right;
+    font-size: 14px;
+    font-family: "Nunito", sans-serif;
+  }
+  .datatable {
+    width: 140px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .datatable table {
+    border: 1px solid #000011;
+    border-collapse: collapse;
+    width: 120px;
+  }
+  #datatable1 {
+    left: 11px;
+    top: 247px;
+  }
+
+  #datatable1 p {
+    margin-bottom: 5px;
+  }
+  #datatable2 {
+    left: 167px;
+    top: 245px;
+  }
+  #datatable2 p {
+    margin-bottom: 5px;
+  }
+  #titleincanvas {
+    position: absolute;
+    left: 57px;
+    top: 40px;
+  }
+
+  #canvas-container {
+    height: 458px;
+  }
+  #variables {
+    width: 100%;
+  }
+  .main__task-div footer p {
+    height: 1px;
+  }
+  p {
+    margin-bottom: 65px;
+  }
+}
+/* 
+
+- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+ */
