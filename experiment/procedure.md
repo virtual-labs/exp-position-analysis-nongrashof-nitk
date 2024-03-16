@@ -1,8 +1,15 @@
+### Procedure
 
+<div style="text-align:left">
+  Click on the Simulation icon    <img src="images/simulation.png" alt="Alt text" style="height:80px; width:80px;">  to view the simulation screen. 
 
-Read the value of link lengths and the input angle θ2, then use the formulae given below to calculate the value of unknowns θ3, θ4 and γ
+   ![Alt text](images/Simscreen1.png)
+   
+   In order to view the variable section click on the Variable icon. <img src="images/var1.png" alt="Alt text" style="height:80px; width:80px;">
 
-![img](./images/exp1P.png)
+   ![Alt text](images/var2.png)
 
-Additionally, find out the limiting values of position of input link. This is done by finding out the positions beyond which θ3 and/or θ4 don't have a defined value.
-For special cases of positioning (e.g. when two link are aligned) use simple geometry and trigonometry relations to find out the solution
+   Click on Play icon <img src="images/play1.png" alt="Alt text" style="height:80px; width:80px;"> to run the simulation and click on Pause icon <img src="images/pause.png" alt="Alt text" style="height:80px; width:80px;"> to stop it.
+
+   Click on the Rotate icon  <img src="images/rotate_clockwise.png" alt="Alt text" style="height:80px; width:80px;"> to change the direction of rotation.
+</div>
