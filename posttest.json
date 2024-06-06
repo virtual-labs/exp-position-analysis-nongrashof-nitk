@@ -1,0 +1,94 @@
+{
+    "version": 2.0,
+    "questions": [
+      {
+        "question": "Which of the following is possible for Input and Output links in case of Non-Grashof linkage?",
+        "answers": {
+          "a": "Crank-Crank",
+          "b": "Crank-Rocker",
+          "c": "Rocker-Rocker",
+          "d": "All"
+        },
+        "explanations": {
+          "a": "",
+          "b": "",
+          "c": "",
+          "d": ""
+        },
+        "correctAnswer": "c",
+        "difficulty": ""
+      },
+      {
+        "question": "In Drag Link Mechanism",
+        "answers": {
+          "a": "Shortest link is fixed",
+          "b": "Longest link is fixed",
+          "c": "One other than shortest or longest link is fixed",
+          "d": "Any link can be fixed"
+        },
+        "explanations": {
+          "a": "",
+          "b": "",
+          "c": "",
+          "d": ""
+        },
+        "correctAnswer": "a",
+        "difficulty": ""
+      },
+      {
+        "question": "In a Non-Grashof mechanism, if longest link is fixed and shortest link is coupler which type of four bar mechanism would be formed?",
+        "answers": {
+          "a": "Double Rocker",
+          "b": "Crank Rocker",
+          "c": "Double Crank",
+          "d": "Can't be determined"
+        },
+        "explanations": {
+          "a": "",
+          "b": "",
+          "c": "",
+          "d": ""
+        },
+        "correctAnswer": "a",
+        "difficulty": ""
+      },
+      {
+        "question": " Which is true for a Non-Grashof Mechanism",
+        "answers": {
+          "a": "s+p&lt;l+q",
+          "b": "s+l&lt;p+q",
+          "c": "s+p&gt;l+q",
+          "d": "s+l&gt;p+q"
+        },
+        "explanations": {
+          "a": "",
+          "b": "",
+          "c": "",
+          "d": ""
+        },
+        "correctAnswer": "d",
+        "difficulty": ""
+      },
+      {
+        "question": "If Grashof condition is not met, which link definitely can complete a rotation ",
+        "answers": {
+          "a": "Shortest Link",
+          "b": "None of the links",
+          "c": "Shorter of the remaining links",
+          "d": "Longest Link"
+        },
+        "explanations": {
+          "a": "",
+          "b": "",
+          "c": "",
+          "d": ""
+        },
+        "correctAnswer": "b",
+        "difficulty": ""
+      
+      
+      }
+    ]
+  }
+  
+  

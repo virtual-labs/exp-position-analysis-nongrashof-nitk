@@ -1,0 +1,402 @@
+
+/home/runner/work/exp-position-analysis-nongrashof-nitk/exp-position-analysis-nongrashof-nitk/experiment/simulation/js/MOMscript.js
+   22:10  warning  'point' is defined but never used       no-unused-vars
+   30:10  warning  'pointtrans' is defined but never used  no-unused-vars
+   38:10  warning  'pointdisp' is defined but never used   no-unused-vars
+   88:10  warning  'pointdist' is defined but never used   no-unused-vars
+   94:10  warning  'pointjoin' is defined but never used   no-unused-vars
+  109:10  warning  'pointtrace' is defined but never used  no-unused-vars
+  127:10  warning  'deg' is defined but never used         no-unused-vars
+  137:10  warning  'drawrect' is defined but never used    no-unused-vars
+  157:10  warning  'drawArrow' is defined but never used   no-unused-vars
+  173:10  warning  'signof' is defined but never used      no-unused-vars
+  179:10  warning  'roundd' is defined but never used      no-unused-vars
+  185:10  warning  'plotgraph' is defined but never used   no-unused-vars
+  195:1   warning  'i' is not defined                      no-undef
+  197:7   warning  'i' is not defined                      no-undef
+  199:20  warning  'i' is not defined                      no-undef
+  199:27  warning  'i' is not defined                      no-undef
+  200:2   warning  'i' is not defined                      no-undef
+  201:6   warning  'i' is not defined                      no-undef
+  204:3   warning  'i' is not defined                      no-undef
+  204:5   warning  'i' is not defined                      no-undef
+
+/home/runner/work/exp-position-analysis-nongrashof-nitk/exp-position-analysis-nongrashof-nitk/experiment/simulation/js/dpi.js
+  42:10  error  Parsing error: Identifier 'fix_dpi' has already been declared
+
+/home/runner/work/exp-position-analysis-nongrashof-nitk/exp-position-analysis-nongrashof-nitk/experiment/simulation/js/jquery-3.6.0.js
+     17:44  warning  'module' is not defined                                                    no-undef
+     25:5   warning  'module' is not defined                                                    no-undef
+    142:13  warning  'Symbol' is already defined as a built-in global variable                  no-redeclare
+    717:22  warning  Unexpected control character(s) in regular expression: \x1f, \x1f          no-control-regex
+    779:50  warning  Empty block statement                                                      no-empty
+   2185:38  warning  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   3205:16  warning  Unnecessary escape character: \/                                           no-useless-escape
+   3507:52  warning  Empty block statement                                                      no-empty
+   4584:21  warning  Empty block statement                                                      no-empty
+   5051:28  warning  Unnecessary escape character: \/                                           no-useless-escape
+   5268:19  warning  Empty block statement                                                      no-empty
+   6564:25  warning  Empty block statement                                                      no-empty
+   9171:17  warning  Empty block statement                                                      no-empty
+   9819:28  warning  'urlAnchor.href' is assigned to itself                                     no-self-assign
+  10269:17  warning  Empty block statement                                                      no-empty
+  11162:39  warning  'define' is not defined                                                    no-undef
+  11163:5   warning  'define' is not defined                                                    no-undef
+
+/home/runner/work/exp-position-analysis-nongrashof-nitk/exp-position-analysis-nongrashof-nitk/experiment/simulation/js/jquery-ui.js
+      9:39  warning  'define' is not defined                                      no-undef
+     11:5   warning  'define' is not defined                                      no-undef
+     14:13  warning  'jQuery' is not defined                                      no-undef
+     21:7   warning  'version' is assigned a value but never used                 no-unused-vars
+    797:7   warning  'widget' is assigned a value but never used                  no-unused-vars
+    822:19  warning  Unnecessary escape character: \+                             no-useless-escape
+    822:21  warning  Unnecessary escape character: \-                             no-useless-escape
+   1365:7   warning  'position' is assigned a value but never used                no-unused-vars
+   1381:7   warning  'data' is assigned a value but never used                    no-unused-vars
+   1410:7   warning  'disableSelection' is assigned a value but never used        no-unused-vars
+   1452:23  warning  Unnecessary escape character: \-                             no-useless-escape
+   1462:39  warning  Unnecessary escape character: \%                             no-useless-escape
+   1462:63  warning  Unnecessary escape character: \%                             no-useless-escape
+   1462:87  warning  Unnecessary escape character: \%                             no-useless-escape
+   1499:61  warning  Unnecessary escape character: \%                             no-useless-escape
+   1499:85  warning  Unnecessary escape character: \%                             no-useless-escape
+   2078:29  warning  Empty block statement                                        no-empty
+   3120:63  warning  Empty block statement                                        no-empty
+   3156:7   warning  'effectsEffectBlind' is assigned a value but never used      no-unused-vars
+   3217:7   warning  'effectsEffectBounce' is assigned a value but never used     no-unused-vars
+   3309:7   warning  'effectsEffectClip' is assigned a value but never used       no-unused-vars
+   3360:7   warning  'effectsEffectDrop' is assigned a value but never used       no-unused-vars
+   3418:7   warning  'effectsEffectExplode' is assigned a value but never used    no-unused-vars
+   3523:7   warning  'effectsEffectFade' is assigned a value but never used       no-unused-vars
+   3560:7   warning  'effectsEffectFold' is assigned a value but never used       no-unused-vars
+   3639:7   warning  'effectsEffectHighlight' is assigned a value but never used  no-unused-vars
+   3683:7   warning  'effectsEffectSize' is assigned a value but never used       no-unused-vars
+   3884:7   warning  'effectsEffectScale' is assigned a value but never used      no-unused-vars
+   3929:7   warning  'effectsEffectPuff' is assigned a value but never used       no-unused-vars
+   3957:7   warning  'effectsEffectPulsate' is assigned a value but never used    no-unused-vars
+   4007:7   warning  'effectsEffectShake' is assigned a value but never used      no-unused-vars
+   4062:7   warning  'effectsEffectSlide' is assigned a value but never used      no-unused-vars
+   4127:7   warning  'effect' is already defined                                  no-redeclare
+   4133:7   warning  'effectsEffectTransfer' is assigned a value but never used   no-unused-vars
+   4209:7   warning  'focusable' is assigned a value but never used               no-unused-vars
+   4214:7   warning  'form' is assigned a value but never used                    no-unused-vars
+   4234:7   warning  'formResetMixin' is assigned a value but never used          no-unused-vars
+   4311:22  warning  Unexpected control character(s) in regular expression: \x1f  no-control-regex
+   4369:7   warning  'keycode' is assigned a value but never used                 no-unused-vars
+   4402:7   warning  'labels' is assigned a value but never used                  no-unused-vars
+   4455:7   warning  'scrollParent' is assigned a value but never used            no-unused-vars
+   4492:7   warning  'tabbable' is assigned a value but never used                no-unused-vars
+   4516:7   warning  'uniqueId' is assigned a value but never used                no-unused-vars
+   4558:7   warning  'widgetsAccordion' is assigned a value but never used        no-unused-vars
+   5187:7   warning  'safeActiveElement' is assigned a value but never used       no-unused-vars
+   5233:7   warning  'widgetsMenu' is assigned a value but never used             no-unused-vars
+   5939:13  warning  Unnecessary escape character: \-                             no-useless-escape
+   5939:15  warning  Unnecessary escape character: \[                             no-useless-escape
+   5939:30  warning  Unnecessary escape character: \^                             no-useless-escape
+   6581:30  warning  Unnecessary escape character: \-                             no-useless-escape
+   6581:32  warning  Unnecessary escape character: \[                             no-useless-escape
+   6581:47  warning  Unnecessary escape character: \^                             no-useless-escape
+   6626:7   warning  'widgetsAutocomplete' is assigned a value but never used     no-unused-vars
+   6648:7   warning  'widgetsControlgroup' is assigned a value but never used     no-unused-vars
+   7239:7   warning  'widgetsCheckboxradio' is assigned a value but never used    no-unused-vars
+   7686:7   warning  'widgetsButton' is assigned a value but never used           no-unused-vars
+   7921:51  warning  Unnecessary escape character: \-                             no-useless-escape
+   8620:23  warning  Empty block statement                                        no-empty
+   9326:18  warning  Unexpected constant condition                                no-constant-condition
+   9623:27  warning  Unnecessary escape character: \-                             no-useless-escape
+  10293:40  warning  Unnecessary escape character: \-                             no-useless-escape
+  10295:32  warning  Unnecessary escape character: \-                             no-useless-escape
+  10435:35  warning  Unnecessary escape character: \-                             no-useless-escape
+  10438:35  warning  Unnecessary escape character: \-                             no-useless-escape
+  10603:7   warning  'widgetsDatepicker' is assigned a value but never used       no-unused-vars
+  10606:7   warning  'ie' is assigned a value but never used                      no-unused-vars
+  10627:7   warning  'widgetsMouse' is assigned a value but never used            no-unused-vars
+  10835:7   warning  'plugin' is assigned a value but never used                  no-unused-vars
+  10868:7   warning  'safeBlur' is assigned a value but never used                no-unused-vars
+  12169:7   warning  'widgetsDraggable' is assigned a value but never used        no-unused-vars
+  13428:7   warning  'widgetsResizable' is assigned a value but never used        no-unused-vars
+  14383:7   warning  'widgetsDialog' is assigned a value but never used           no-unused-vars
+  14902:7   warning  'widgetsDroppable' is assigned a value but never used        no-unused-vars
+  14924:7   warning  'widgetsProgressbar' is assigned a value but never used      no-unused-vars
+  15081:7   warning  'widgetsSelectable' is assigned a value but never used       no-unused-vars
+  15399:7   warning  'widgetsSelectmenu' is assigned a value but never used       no-unused-vars
+  16098:7   warning  'widgetsSlider' is assigned a value but never used           no-unused-vars
+  16890:7   warning  'widgetsSortable' is assigned a value but never used         no-unused-vars
+  17501:33  warning  Unnecessary escape character: \-                             no-useless-escape
+  19078:15  warning  'Globalize' is not defined                                   no-undef
+  19089:11  warning  'Globalize' is not defined                                   no-undef
+  19209:7   warning  'widgetsSpinner' is assigned a value but never used          no-unused-vars
+  19265:25  warning  Empty block statement                                        no-empty
+  19268:25  warning  Empty block statement                                        no-empty
+  19507:38  warning  Unnecessary escape character: \/                             no-useless-escape
+  19507:47  warning  Unnecessary escape character: \[                             no-useless-escape
+  19507:51  warning  Unnecessary escape character: \^                             no-useless-escape
+  20132:7   warning  'widgetsTabs' is assigned a value but never used             no-unused-vars
+  20643:7   warning  'widgetsTooltip' is assigned a value but never used          no-unused-vars
+
+/home/runner/work/exp-position-analysis-nongrashof-nitk/exp-position-analysis-nongrashof-nitk/experiment/simulation/js/jquery.ui.touch-punch.js
+  174:4  warning  'jQuery' is not defined  no-undef
+
+/home/runner/work/exp-position-analysis-nongrashof-nitk/exp-position-analysis-nongrashof-nitk/experiment/simulation/js/jquery.ui.touch-punch.min.js
+  81:4  warning  'jQuery' is not defined  no-undef
+
+/home/runner/work/exp-position-analysis-nongrashof-nitk/exp-position-analysis-nongrashof-nitk/experiment/simulation/js/newscript.js
+    4:5    warning  'commenttext' is assigned a value but never used  no-unused-vars
+    5:5    warning  'commentloc' is assigned a value but never used   no-unused-vars
+    7:16   warning  'point' is not defined                            no-undef
+    8:16   warning  'point' is not defined                            no-undef
+    9:12   warning  'point' is not defined                            no-undef
+   10:12   warning  'point' is not defined                            no-undef
+   11:12   warning  'point' is not defined                            no-undef
+   12:12   warning  'point' is not defined                            no-undef
+   13:13   warning  'point' is not defined                            no-undef
+   14:13   warning  'point' is not defined                            no-undef
+   15:13   warning  'point' is not defined                            no-undef
+   16:13   warning  'point' is not defined                            no-undef
+   22:5    warning  'omega3' is assigned a value but never used       no-unused-vars
+   22:15   warning  'omega4' is assigned a value but never used       no-unused-vars
+   23:14   warning  'gammadash' is assigned a value but never used    no-unused-vars
+   32:5    warning  'time' is assigned a value but never used         no-unused-vars
+   34:5    warning  'ptx' is assigned a value but never used          no-unused-vars
+   35:5    warning  'pty' is assigned a value but never used          no-unused-vars
+   37:5    warning  'legendCS' is assigned a value but never used     no-unused-vars
+   38:5    warning  'quickrefCS' is assigned a value but never used   no-unused-vars
+   40:5    warning  'temp' is assigned a value but never used         no-unused-vars
+   49:10   warning  'editcss' is defined but never used               no-unused-vars
+   51:1    warning  '$' is not defined                                no-undef
+   52:1    warning  '$' is not defined                                no-undef
+   53:1    warning  '$' is not defined                                no-undef
+   65:10   warning  'startsim' is defined but never used              no-unused-vars
+   71:10   warning  'simstate' is defined but never used              no-unused-vars
+   78:1    warning  Mixed spaces and tabs                             no-mixed-spaces-and-tabs
+   80:5    warning  '$' is not defined                                no-undef
+   86:2    warning  Mixed spaces and tabs                             no-mixed-spaces-and-tabs
+   87:2    warning  Mixed spaces and tabs                             no-mixed-spaces-and-tabs
+  157:10   warning  'varinit' is defined but never used               no-unused-vars
+  161:1    warning  '$' is not defined                                no-undef
+  162:1    warning  '$' is not defined                                no-undef
+  164:1    warning  '$' is not defined                                no-undef
+  165:1    warning  '$' is not defined                                no-undef
+  167:1    warning  '$' is not defined                                no-undef
+  168:1    warning  '$' is not defined                                no-undef
+  170:1    warning  '$' is not defined                                no-undef
+  171:1    warning  '$' is not defined                                no-undef
+  173:1    warning  '$' is not defined                                no-undef
+  174:1    warning  '$' is not defined                                no-undef
+  176:1    warning  '$' is not defined                                no-undef
+  177:1    warning  '$' is not defined                                no-undef
+  185:1    warning  '$' is not defined                                no-undef
+  186:1    warning  '$' is not defined                                no-undef
+  189:1    warning  '$' is not defined                                no-undef
+  189:51   warning  '$' is not defined                                no-undef
+  190:1    warning  '$' is not defined                                no-undef
+  190:51   warning  '$' is not defined                                no-undef
+  191:1    warning  '$' is not defined                                no-undef
+  194:1    warning  '$' is not defined                                no-undef
+  195:1    warning  '$' is not defined                                no-undef
+  198:1    warning  '$' is not defined                                no-undef
+  198:51   warning  '$' is not defined                                no-undef
+  199:1    warning  '$' is not defined                                no-undef
+  199:51   warning  '$' is not defined                                no-undef
+  200:1    warning  '$' is not defined                                no-undef
+  203:1    warning  '$' is not defined                                no-undef
+  204:1    warning  '$' is not defined                                no-undef
+  207:1    warning  '$' is not defined                                no-undef
+  207:51   warning  '$' is not defined                                no-undef
+  208:1    warning  '$' is not defined                                no-undef
+  208:51   warning  '$' is not defined                                no-undef
+  209:1    warning  '$' is not defined                                no-undef
+  212:1    warning  '$' is not defined                                no-undef
+  213:1    warning  '$' is not defined                                no-undef
+  216:1    warning  '$' is not defined                                no-undef
+  216:51   warning  '$' is not defined                                no-undef
+  217:1    warning  '$' is not defined                                no-undef
+  217:51   warning  '$' is not defined                                no-undef
+  218:1    warning  '$' is not defined                                no-undef
+  221:1    warning  '$' is not defined                                no-undef
+  222:1    warning  '$' is not defined                                no-undef
+  225:1    warning  '$' is not defined                                no-undef
+  225:55   warning  '$' is not defined                                no-undef
+  226:1    warning  '$' is not defined                                no-undef
+  226:55   warning  '$' is not defined                                no-undef
+  227:1    warning  '$' is not defined                                no-undef
+  230:1    warning  '$' is not defined                                no-undef
+  231:1    warning  '$' is not defined                                no-undef
+  234:1    warning  '$' is not defined                                no-undef
+  234:55   warning  '$' is not defined                                no-undef
+  235:1    warning  '$' is not defined                                no-undef
+  235:55   warning  '$' is not defined                                no-undef
+  236:1    warning  '$' is not defined                                no-undef
+  249:29   warning  'rad' is not defined                              no-undef
+  250:25   warning  'rad' is not defined                              no-undef
+  251:29   warning  'rad' is not defined                              no-undef
+  258:3    warning  '$' is not defined                                no-undef
+  259:3    warning  '$' is not defined                                no-undef
+  264:3    warning  '$' is not defined                                no-undef
+  265:3    warning  '$' is not defined                                no-undef
+  276:14   warning  '$' is not defined                                no-undef
+  276:65   warning  '$' is not defined                                no-undef
+  277:13   warning  '$' is not defined                                no-undef
+  277:63   warning  '$' is not defined                                no-undef
+  297:1    warning  '$' is not defined                                no-undef
+  297:32   warning  '$' is not defined                                no-undef
+  298:1    warning  '$' is not defined                                no-undef
+  298:32   warning  '$' is not defined                                no-undef
+  299:1    warning  '$' is not defined                                no-undef
+  299:32   warning  '$' is not defined                                no-undef
+  300:1    warning  '$' is not defined                                no-undef
+  300:32   warning  '$' is not defined                                no-undef
+  301:1    warning  '$' is not defined                                no-undef
+  301:36   warning  '$' is not defined                                no-undef
+  302:1    warning  '$' is not defined                                no-undef
+  302:36   warning  '$' is not defined                                no-undef
+  304:4    warning  '$' is not defined                                no-undef
+  305:4    warning  '$' is not defined                                no-undef
+  306:4    warning  '$' is not defined                                no-undef
+  307:4    warning  '$' is not defined                                no-undef
+  312:1    warning  '$' is not defined                                no-undef
+  313:1    warning  '$' is not defined                                no-undef
+  315:1    warning  '$' is not defined                                no-undef
+  316:1    warning  '$' is not defined                                no-undef
+  317:1    warning  '$' is not defined                                no-undef
+  318:1    warning  '$' is not defined                                no-undef
+  319:1    warning  '$' is not defined                                no-undef
+  320:1    warning  '$' is not defined                                no-undef
+  321:1    warning  '$' is not defined                                no-undef
+  322:1    warning  '$' is not defined                                no-undef
+  329:8    warning  '$' is not defined                                no-undef
+  330:30   warning  'deg' is not defined                              no-undef
+  336:1    warning  '$' is not defined                                no-undef
+  337:1    warning  '$' is not defined                                no-undef
+  338:1    warning  '$' is not defined                                no-undef
+  339:1    warning  '$' is not defined                                no-undef
+  340:1    warning  '$' is not defined                                no-undef
+  341:1    warning  '$' is not defined                                no-undef
+  342:1    warning  '$' is not defined                                no-undef
+  343:1    warning  '$' is not defined                                no-undef
+  345:1    warning  '$' is not defined                                no-undef
+  346:1    warning  '$' is not defined                                no-undef
+  351:8    warning  '$' is not defined                                no-undef
+  362:28   warning  'rad' is not defined                              no-undef
+  363:24   warning  'rad' is not defined                              no-undef
+  364:28   warning  'rad' is not defined                              no-undef
+  366:13   warning  '$' is not defined                                no-undef
+  366:65   warning  '$' is not defined                                no-undef
+  372:35   warning  'rad' is not defined                              no-undef
+  373:33   warning  'rad' is not defined                              no-undef
+  376:35   warning  'rad' is not defined                              no-undef
+  377:35   warning  'rad' is not defined                              no-undef
+  381:9    warning  'deg' is not defined                              no-undef
+  382:13   warning  'deg' is not defined                              no-undef
+  384:9    warning  'deg' is not defined                              no-undef
+  384:36   warning  'rad' is not defined                              no-undef
+  384:61   warning  'rad' is not defined                              no-undef
+  385:13   warning  'deg' is not defined                              no-undef
+  385:40   warning  'rad' is not defined                              no-undef
+  385:69   warning  'rad' is not defined                              no-undef
+  387:32   warning  'rad' is not defined                              no-undef
+  388:32   warning  'rad' is not defined                              no-undef
+  389:34   warning  'rad' is not defined                              no-undef
+  390:34   warning  'rad' is not defined                              no-undef
+  400:17   warning  '$' is not defined                                no-undef
+  400:68   warning  '$' is not defined                                no-undef
+  401:13   warning  '$' is not defined                                no-undef
+  401:63   warning  '$' is not defined                                no-undef
+  409:58   warning  '$' is not defined                                no-undef
+  409:141  warning  '$' is not defined                                no-undef
+  423:3    warning  '$' is not defined                                no-undef
+  424:3    warning  '$' is not defined                                no-undef
+  425:3    warning  '$' is not defined                                no-undef
+  469:3    warning  '$' is not defined                                no-undef
+  470:3    warning  '$' is not defined                                no-undef
+  471:3    warning  '$' is not defined                                no-undef
+  472:5    warning  'pointtrans' is not defined                       no-undef
+  473:5    warning  'pointtrans' is not defined                       no-undef
+  474:5    warning  'pointtrans' is not defined                       no-undef
+  475:5    warning  'pointtrans' is not defined                       no-undef
+  476:6    warning  'pointtrans' is not defined                       no-undef
+  477:6    warning  'pointtrans' is not defined                       no-undef
+  478:6    warning  'pointtrans' is not defined                       no-undef
+  479:6    warning  'pointtrans' is not defined                       no-undef
+  481:3    warning  'pointjoin' is not defined                        no-undef
+  482:3    warning  'pointjoin' is not defined                        no-undef
+  483:3    warning  'pointjoin' is not defined                        no-undef
+  484:3    warning  'pointjoin' is not defined                        no-undef
+  485:3    warning  'pointjoin' is not defined                        no-undef
+  486:3    warning  'pointjoin' is not defined                        no-undef
+  487:3    warning  'pointjoin' is not defined                        no-undef
+  488:3    warning  'pointjoin' is not defined                        no-undef
+  489:3    warning  'pointdisp' is not defined                        no-undef
+  490:3    warning  'pointdisp' is not defined                        no-undef
+  491:3    warning  'pointdisp' is not defined                        no-undef
+  492:3    warning  'pointdisp' is not defined                        no-undef
+  493:3    warning  'pointdisp' is not defined                        no-undef
+  494:3    warning  'pointdisp' is not defined                        no-undef
+  495:3    warning  'pointdisp' is not defined                        no-undef
+  496:3    warning  'pointdisp' is not defined                        no-undef
+  567:39   warning  'roundd' is not defined                           no-undef
+  568:39   warning  'roundd' is not defined                           no-undef
+  569:39   warning  'roundd' is not defined                           no-undef
+  570:27   warning  'roundd' is not defined                           no-undef
+  576:39   warning  'roundd' is not defined                           no-undef
+  577:39   warning  'roundd' is not defined                           no-undef
+  578:39   warning  'roundd' is not defined                           no-undef
+  579:27   warning  'roundd' is not defined                           no-undef
+
+/home/runner/work/exp-position-analysis-nongrashof-nitk/exp-position-analysis-nongrashof-nitk/experiment/simulation/js/script.js
+   3:7   warning  'ctx' is assigned a value but never used  no-unused-vars
+  10:3   warning  '$' is not defined                        no-undef
+  11:3   warning  '$' is not defined                        no-undef
+  12:3   warning  '$' is not defined                        no-undef
+  13:3   warning  '$' is not defined                        no-undef
+  14:3   warning  '$' is not defined                        no-undef
+  15:3   warning  '$' is not defined                        no-undef
+  16:3   warning  '$' is not defined                        no-undef
+  17:3   warning  '$' is not defined                        no-undef
+  20:3   warning  '$' is not defined                        no-undef
+  21:3   warning  '$' is not defined                        no-undef
+  23:3   warning  '$' is not defined                        no-undef
+  24:5   warning  '$' is not defined                        no-undef
+  25:5   warning  'time' is not defined                     no-undef
+  28:3   warning  '$' is not defined                        no-undef
+  29:5   warning  '$' is not defined                        no-undef
+  30:5   warning  'time' is not defined                     no-undef
+  33:3   warning  '$' is not defined                        no-undef
+  37:3   warning  '$' is not defined                        no-undef
+  38:3   warning  '$' is not defined                        no-undef
+  40:3   warning  '$' is not defined                        no-undef
+  41:5   warning  '$' is not defined                        no-undef
+  42:5   warning  'time' is not defined                     no-undef
+  45:3   warning  '$' is not defined                        no-undef
+  46:5   warning  '$' is not defined                        no-undef
+  47:5   warning  'time' is not defined                     no-undef
+  50:3   warning  '$' is not defined                        no-undef
+  53:3   warning  '$' is not defined                        no-undef
+  57:3   warning  '$' is not defined                        no-undef
+  58:3   warning  '$' is not defined                        no-undef
+  60:3   warning  '$' is not defined                        no-undef
+  61:5   warning  '$' is not defined                        no-undef
+  62:5   warning  'time' is not defined                     no-undef
+  65:3   warning  '$' is not defined                        no-undef
+  66:5   warning  '$' is not defined                        no-undef
+  67:5   warning  'time' is not defined                     no-undef
+  70:3   warning  '$' is not defined                        no-undef
+  73:3   warning  '$' is not defined                        no-undef
+  74:3   warning  '$' is not defined                        no-undef
+  77:3   warning  '$' is not defined                        no-undef
+  77:38  warning  '$' is not defined                        no-undef
+  78:3   warning  '$' is not defined                        no-undef
+  78:40  warning  '$' is not defined                        no-undef
+  79:3   warning  '$' is not defined                        no-undef
+  79:38  warning  '$' is not defined                        no-undef
+  80:3   warning  'endmass' is not defined                  no-undef
+  80:13  warning  '$' is not defined                        no-undef
+  81:3   warning  'beamlength' is not defined               no-undef
+  81:16  warning  '$' is not defined                        no-undef
+  82:3   warning  'dampingratio' is not defined             no-undef
+  82:18  warning  '$' is not defined                        no-undef
+  84:3   warning  Unnecessary semicolon                     no-extra-semi
+
+✖ 382 problems (1 error, 381 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
