@@ -24,6 +24,7 @@
   position: relative;
 }
 
+
 h1 {
   flex: 0 0 1;
   display: inline-block;
@@ -201,6 +202,8 @@ h1 {
   grid-column: 1/-1;
 }
 
+
+
 .footer {
   font-size: 1.2rem;
   grid-column: 1/-1;
@@ -212,7 +215,7 @@ h1 {
   );
   color: var(--clr-text-clr);
   margin-bottom: 0;
-  height: 42px;
+  height:42px;
   padding: 5px;
 }
 
@@ -349,8 +352,8 @@ h1 {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-  align-items: center;
-}
+  align-items: center; 
+} 
 
 .var-div {
   display: grid;
@@ -393,3 +396,4 @@ h1 {
   font-size: 12px;
   left: -10px;
 }
+
