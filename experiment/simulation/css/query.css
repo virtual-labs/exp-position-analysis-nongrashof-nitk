@@ -11,14 +11,14 @@ em:current font size
 
 @media (min-width: 1200px) {
 
-  canvas#simscreen {
+  /* canvas#simscreen {
     width: 100%;
     height: 56%;
     margin-left: 50%;
     top: 0;
   }
-  
-  div#commentboxleft {
+   */
+  /* div#commentboxleft {
     position: absolute;
     left: 9px;
     top: 403px;
@@ -40,14 +40,14 @@ em:current font size
     font-size: 16px;
     font-family: "Nunito", sans-serif;
     line-height: 15px;
-  }
+  } */
 
   #canvas-container {
     /* margin-left: 160px; */
-    align-items: center;
-    width: 132%;
+    /* align-items: center;
+    width: 132%; */
 }
-.datatable {
+/* .datatable {
   width: 141px;
   font-size: 16px;
   text-align: center;
@@ -79,7 +79,7 @@ font-size: 13px;
   position: absolute;
   left: 222px;
   top: 42px;
-}
+} */
 
 
 #variables{
@@ -134,7 +134,7 @@ font-size: 13px;
     width: 3rem;
     height: 2.8rem;
   }
-
+/* 
   div#commentboxleft {
     position: absolute;
     left: 8px;
@@ -145,10 +145,10 @@ font-size: 13px;
     font-size: 15px;
     font-weight: normal;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   
   
-  div#commentboxright {
+  /* div#commentboxright {
     position: absolute;
     left: 644px;
     top: 394px;
@@ -157,11 +157,11 @@ font-size: 13px;
     text-align: right;
     font-size: 16px;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   #canvas-container {
-    margin-left: 170px;
+    /* margin-left: 170px; */
 }
-.datatable {
+/* .datatable {
   width: 140px;
   font-size: 16px;
   text-align: center;
@@ -171,8 +171,8 @@ font-size: 13px;
   border: 1px solid #000011;
   border-collapse: collapse;
   width: 120px;
-}
-#datatable1{
+} */
+/* #datatable1{
   left : 203px;
   top : 246px;
 }
@@ -186,7 +186,7 @@ font-size: 13px;
   position: absolute;
   left: 320px;
   top: 47px;
-}
+} */
 .tool-list span {
   font-size: 1.2rem;
 }
@@ -277,7 +277,7 @@ font-size: 13px;
     border-top: 1px solid rgba(177, 176, 176, 0.855);
   }
 
-  div#commentboxleft {
+  /* div#commentboxleft {
     position: absolute;
     left: 18px;
     top: 398px;
@@ -287,8 +287,8 @@ font-size: 13px;
     font-size: 15px;
     font-weight: normal;
      font-family: "Nunito", sans-serif;
-  }
-
+  } */
+/* 
   div#commentboxright {
     position: absolute;
     left: 607px;
@@ -298,7 +298,7 @@ font-size: 13px;
     text-align: right;
     font-size: 16px;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   #canvas-container {
     margin-left: 10px;
 }
@@ -330,11 +330,11 @@ font-size: 13px;
   margin-bottom: 5px;
 
 }
-#titleincanvas {
+/* #titleincanvas {
   position: absolute;
   left: 351px;
   top: 47px;
-}
+} */
 p{
   margin-bottom: 70px;
 }
@@ -372,7 +372,7 @@ p{
     border: none;
     border-top: 1px solid rgba(177, 176, 176, 0.855);
   }
-  div#commentboxleft {
+  /* div#commentboxleft {
     position: absolute;
     left: 18px;
     top: 407px;
@@ -382,9 +382,9 @@ p{
     font-size: 15px;
     font-weight: normal;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   
-  div#commentboxright {
+  /* div#commentboxright {
     position: absolute;
     left: 506px;
     top: 410px;
@@ -394,7 +394,7 @@ p{
     line-height: 20px;
     font-size: 16px;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   
   .datatable {
     width: 140px;
@@ -423,11 +423,11 @@ p{
   .tool-list span {
     font-size: 1.6rem;
   }
-  #titleincanvas {
+  /* #titleincanvas {
     position: absolute;
     left: 272px;
     top: 47px;
-  }
+  } */
 }
 
 /* **************************** */
@@ -476,7 +476,7 @@ p{
     border-top: 1px solid rgba(177, 176, 176, 0.855);
   }
 
-  div#commentboxleft {
+  /* div#commentboxleft {
     position: absolute;
     left: 9px;
     top: 409px;
@@ -486,9 +486,9 @@ p{
     font-size: 15px;
     font-weight: normal;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   
-  div#commentboxright {
+  /* div#commentboxright {
     position: absolute;
     left: 358px;
     top: 410px;
@@ -498,7 +498,7 @@ p{
     line-height: 19px;
     font-size: 16px;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   .datatable {
     width: 140px;
     font-size: 14px;
@@ -522,11 +522,11 @@ p{
     top : 254px;
   }
   
-  #titleincanvas {
+  /* #titleincanvas {
     position: absolute;
     left: 195px;
     top: 47px;
-  }
+  } */
 
 
   #variables{
@@ -600,7 +600,7 @@ p{
   .tooltip {
     font-size: 1rem;
   }
-  div#commentboxleft {
+  /* div#commentboxleft {
     position: absolute;
     left: 4px;
     top: 442px;
@@ -610,9 +610,9 @@ p{
     font-size: 13.5px;
     font-weight: normal;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   
-  div#commentboxright {
+  /* div#commentboxright {
     position: absolute;
     left: 197px;
     top: 442px;
@@ -621,7 +621,7 @@ p{
     text-align: right;
     font-size: 14px;
      font-family: "Nunito", sans-serif;
-  }
+  } */
   .datatable {
     width: 140px;
     font-size: 16px;
@@ -642,6 +642,7 @@ p{
     margin-bottom: 5px;
 
   }
+
   #datatable2{
     left : 167px;
     top : 245px;
@@ -651,11 +652,14 @@ p{
 
     
   }
-  #titleincanvas {
+  #canvas-container {
+    height: 458px;
+}
+  /* #titleincanvas {
     position: absolute;
     left: 57px;
     top: 40px;
-  }
+  } */
 
   #canvas-container {
     height: 458px;
