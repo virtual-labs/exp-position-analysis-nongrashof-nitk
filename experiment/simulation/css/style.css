@@ -10,7 +10,18 @@
   position: relative;
   padding: 0.5rem 0.5rem;
 }
-
+#commentboxright1 {
+  color: red;
+  font-weight: bold;
+  font-size: 19px;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  /* height: 100%; */
+  
+  position: absolute;
+  top: 167px;
+}
 .title-div {
   display: flex;
   gap: 5rem;
@@ -92,6 +103,7 @@ h1 {
   padding: 1.2rem 1.6rem;
   border-radius: 0.9rem;
   left: 0;
+
 }
 
 .logo-div {
@@ -127,6 +139,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 .tool-link[title="Variables"] {
   color: var(--clr-title-background);
@@ -248,18 +261,20 @@ h1 {
   background-color: #fff;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
   gap: 0;
-  flex-wrap: wrap;
-  flex-direction: row;
   height: auto;
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
 }
 #canvas-container {
-  display: flex;
+  grid-column: 1/-1;
   width: 100%;
-  height: 420px;
-  flex-direction: column;
+  display: block;
+  height: 100%;
+  align-self: center;
+  display: flex;
+  justify-content: center;
 }
 #canvas {
   border-left: 1px solid rgba(177, 176, 176, 0.855);
@@ -374,9 +389,23 @@ h1 {
 }
 
 .datatable {
-  width: 140px;
-  font-size: 11px;
-  text-align: center;
+  justify-self: center;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#commentboxleft {
+  justify-self: center;
+
+  /* display: flex; */
+ 
+}
+
+#commentboxright {
+  justify-self: center;
+
+  
 }
 .datatable table {
   border: 1px solid #000011;
@@ -392,8 +421,10 @@ h1 {
   width: 52px;
 }
 .datatable p {
-  position: relative;
-  font-size: 12px;
-  left: -10px;
+  margin-bottom: 0;
+}
+.titleincanvas {
+  grid-column: 1/-1;
+  justify-self: center;
 }
 

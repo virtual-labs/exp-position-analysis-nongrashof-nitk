@@ -426,7 +426,7 @@ function draw()
   ctx.strokeStyle="#000000";
   ctx.font = "16px Georgia";
   ctx.save();
-  ctx.strokeText("Combination satisfies Grashof rule ",100,200);
+  ctx.strokeText("This simulation is exclusively for non-Grashof Combinations.<br> Please change the slider value ",100,200);
   ctx.font="12px Times";
   ctx.strokeText("This simulation is exclusively for non-Grashof Combinations ",100,250);
   ctx.restore();
@@ -537,11 +537,26 @@ function checkGrashof()
 	if (s+l>p+q)
 	{ 
 		flaggrashof=false;
-		
+    document.getElementById("canvas-container").style.display="block";
+    document.getElementById("datatable1").style.display="block";
+    document.getElementById("datatable2").style.visibility = "visible";
+    document.getElementById("titleincanvas").style.visibility = "visible";
+    document.getElementById("commentboxleft").style.visibility = "visible";
+    document.getElementById("commentboxright1").style.visibility = "hidden";
 	}
 	else 
 	{
 		flaggrashof=true;
+    
+     document.getElementById("commentboxright1").style.visibility = "visible";
+     document.getElementById("commentboxright").style.visibility = "hidden";
+     document.getElementById("commentboxright1").innerHTML = 
+         'This simulation is exclusively for non-Grashof Combinations.<br> Please change the slider value</div>';
+     document.getElementById("commentboxleft").style.visibility = "hidden";
+     document.getElementById("titleincanvas").style.visibility = "hidden";
+     document.getElementById("canvas-container").style.display="none";
+     document.getElementById("datatable1").style.display="none";
+     document.getElementById("datatable2").style.visibility = "hidden";
 
 	}
 }
@@ -594,13 +609,13 @@ function printcomment(commenttext,commentloc)
   else if(commentloc==1)
   {
   document.getElementById('commentboxright').style.visibility='visible';
-  document.getElementById('commentboxleft').style.width='285px';
+  // document.getElementById('commentboxleft').style.width='285px';
   document.getElementById('commentboxleft').innerHTML = commenttext;
   }
   else if(commentloc==2)
   {
   document.getElementById('commentboxright').style.visibility='visible';
-  document.getElementById('commentboxleft').style.width='285px';
+  // document.getElementById('commentboxleft').style.width='285px';
   document.getElementById('commentboxright').innerHTML = commenttext;
   }
   else
