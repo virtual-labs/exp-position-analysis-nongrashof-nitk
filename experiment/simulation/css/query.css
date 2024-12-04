@@ -9,82 +9,11 @@ em:current font size
 /* Below 1344px (Smaller Desktops) */
 /* **************************** */
 
-@media (min-width: 1200px) {
-
-  /* canvas#simscreen {
-    width: 100%;
-    height: 56%;
-    margin-left: 50%;
-    top: 0;
+@media (max-width: 1200px) {
+  body {
+    max-width: 120rem;
+    margin: 0 auto;
   }
-   */
-  /* div#commentboxleft {
-    position: absolute;
-    left: 9px;
-    top: 403px;
-    height: 65px;
-    width: 285px;
-    text-align: left;
-    font-size: 15px;
-    font-weight: normal;
-    font-family: "Nunito", sans-serif;
-  }
-  
-  div#commentboxright {
-    position: absolute;
-    left: 393px;
-    top: 415px;
-    height: 65px;
-    width: 183px;
-    text-align: right;
-    font-size: 16px;
-    font-family: "Nunito", sans-serif;
-    line-height: 15px;
-  } */
-
-  #canvas-container {
-    /* margin-left: 160px; */
-    /* align-items: center;
-    width: 132%; */
-}
-/* .datatable {
-  width: 141px;
-  font-size: 16px;
-  text-align: center;
-}
-
-.datatable table {
-  border: 1px solid #000011;
-  border-collapse: collapse;
-  width: 120px;
-}
-#datatable1{
-  left : 175px;
-  top : 232px;
-}
-#datatable1 p{
-font-size: 14px;
-
-}
-
-#datatable2{
-  left : 445px;
-  top : 232px;
-}
- #datatable2 p{
-font-size: 13px;
-
-}
-#titleincanvas {
-  position: absolute;
-  left: 222px;
-  top: 42px;
-} */
-
-
-#variables{
-  width: 201%;
-}
 }
 
 /* **************************** */
@@ -92,7 +21,6 @@ font-size: 13px;
 /* **************************** */
 
 @media (max-width: 75em) {
-
   canvas#simscreen {
     width: 100%;
     height: 56%;
@@ -134,7 +62,7 @@ font-size: 13px;
     width: 3rem;
     height: 2.8rem;
   }
-/* 
+  /* 
   div#commentboxleft {
     position: absolute;
     left: 8px;
@@ -146,8 +74,7 @@ font-size: 13px;
     font-weight: normal;
      font-family: "Nunito", sans-serif;
   } */
-  
-  
+
   /* div#commentboxright {
     position: absolute;
     left: 644px;
@@ -160,8 +87,8 @@ font-size: 13px;
   } */
   #canvas-container {
     /* margin-left: 170px; */
-}
-/* .datatable {
+  }
+  /* .datatable {
   width: 140px;
   font-size: 16px;
   text-align: center;
@@ -172,7 +99,7 @@ font-size: 13px;
   border-collapse: collapse;
   width: 120px;
 } */
-/* #datatable1{
+  /* #datatable1{
   left : 203px;
   top : 246px;
 }
@@ -187,13 +114,9 @@ font-size: 13px;
   left: 320px;
   top: 47px;
 } */
-.tool-list span {
-  font-size: 1.2rem;
-}
-#variables{
-  width: 201%;
-}
-
+  .tool-list span {
+    font-size: 1.2rem;
+  }
 }
 
 /* **************************** */
@@ -201,7 +124,6 @@ font-size: 13px;
 /* **************************** */
 
 @media (max-width: 59em) {
-
   canvas#simscreen {
     width: 80%;
     height: 51%;
@@ -221,10 +143,7 @@ font-size: 13px;
 
   .main__task-div {
     height: auto;
-    
   }
-
-  
   .sidebar {
     position: fixed;
     padding: 0;
@@ -237,7 +156,10 @@ font-size: 13px;
     justify-content: space-evenly;
     border-radius: 0;
     scroll-behavior: auto;
-    
+    margin: 0;
+  }
+  .main {
+    grid-column: 1/-1;
   }
   .tool-menu {
     list-style: none;
@@ -262,7 +184,7 @@ font-size: 13px;
   .main__task-div:nth-child(4) {
     margin-bottom: 6rem;
   }
- 
+
   .main-section {
     grid-template-columns: 1fr;
   }
@@ -288,7 +210,7 @@ font-size: 13px;
     font-weight: normal;
      font-family: "Nunito", sans-serif;
   } */
-/* 
+  /* 
   div#commentboxright {
     position: absolute;
     left: 607px;
@@ -301,52 +223,46 @@ font-size: 13px;
   } */
   #canvas-container {
     margin-left: 10px;
-}
-.datatable {
-  width: 140px;
-  font-size: 16px;
-  text-align: center;
-}
+  }
+  .datatable {
+    width: 140px;
+    font-size: 16px;
+    text-align: center;
+  }
 
-.datatable table {
-  border: 1px solid #000011;
-  border-collapse: collapse;
-  width: 120px;
-}
-#datatable1{
-  left : 166px;
-  top : 231px;
-}
-#datatable1 p{
-  margin-bottom: 5px;
+  .datatable table {
+    border: 1px solid #000011;
+    border-collapse: collapse;
+    width: 120px;
+  }
+  #datatable1 {
+    left: 166px;
+    top: 231px;
+  }
+  #datatable1 p {
+    margin-bottom: 5px;
+  }
 
-}
-
-#datatable2{
-  left : 620px;
-  top : 235px;
-}
-#datatable2 p{
-  margin-bottom: 5px;
-
-}
-/* #titleincanvas {
+  #datatable2 {
+    left: 620px;
+    top: 235px;
+  }
+  #datatable2 p {
+    margin-bottom: 5px;
+  }
+  /* #titleincanvas {
   position: absolute;
   left: 351px;
   top: 47px;
 } */
-p{
-  margin-bottom: 70px;
+  p {
+    margin-bottom: 70px;
+  }
+
+  #variables {
+    width: 100%;
+  }
 }
-
-#variables{
-  width: 100%;
-}
-}
-
-
-
-
 
 /* **************************** */
 /* Below 820px (Smaller Tablets) */
@@ -383,7 +299,7 @@ p{
     font-weight: normal;
      font-family: "Nunito", sans-serif;
   } */
-  
+
   /* div#commentboxright {
     position: absolute;
     left: 506px;
@@ -395,7 +311,7 @@ p{
     font-size: 16px;
      font-family: "Nunito", sans-serif;
   } */
-  
+
   .datatable {
     width: 140px;
     font-size: 1.6rem;
@@ -407,17 +323,17 @@ p{
     border-collapse: collapse;
     width: 120px;
   }
-  #datatable1{
-    left : 124px;
-    top : 242px;
-  }
-  
-  #datatable2{
-    left : 521px;
-    top : 241px;
+  #datatable1 {
+    left: 124px;
+    top: 242px;
   }
 
-  #variables{
+  #datatable2 {
+    left: 521px;
+    top: 241px;
+  }
+
+  #variables {
     width: 100%;
   }
   .tool-list span {
@@ -487,7 +403,7 @@ p{
     font-weight: normal;
      font-family: "Nunito", sans-serif;
   } */
-  
+
   /* div#commentboxright {
     position: absolute;
     left: 358px;
@@ -511,35 +427,29 @@ p{
     width: 120px;
   }
 
-  #datatable1{
-    left : 88px;
-    top : 254px;
+  #datatable1 {
+    left: 88px;
+    top: 254px;
   }
 
-  
-  #datatable2{
-    left : 379px;
-    top : 254px;
+  #datatable2 {
+    left: 379px;
+    top: 254px;
   }
-  
+
   /* #titleincanvas {
     position: absolute;
     left: 195px;
     top: 47px;
   } */
 
-
-  #variables{
+  #variables {
     width: 100%;
   }
   #canvas-container {
     margin-left: 0;
+  }
 }
-  
- 
-}
-
-
 
 /* **************************** */
 /* Below 540px (Smaller Tablets) */
@@ -550,10 +460,6 @@ p{
     height: 56%;
     left: 0;
     top: 0;
-  }
-  .container {
-    padding: 0.5rem;
-    gap: 1rem;
   }
 
   .title-div h1 {
@@ -611,7 +517,7 @@ p{
     font-weight: normal;
      font-family: "Nunito", sans-serif;
   } */
-  
+
   /* div#commentboxright {
     position: absolute;
     left: 197px;
@@ -633,28 +539,25 @@ p{
     border-collapse: collapse;
     width: 120px;
   }
-  #datatable1{
-    left : 11px;
-    top : 247px;
+  #datatable1 {
+    left: 11px;
+    top: 247px;
   }
-  
-  #datatable1 p{
+
+  #datatable1 p {
     margin-bottom: 5px;
-
   }
 
-  #datatable2{
-    left : 167px;
-    top : 245px;
+  #datatable2 {
+    left: 167px;
+    top: 245px;
   }
-  #datatable2 p{
+  #datatable2 p {
     margin-bottom: 5px;
-
-    
   }
   #canvas-container {
     height: 458px;
-}
+  }
   /* #titleincanvas {
     position: absolute;
     left: 57px;
@@ -663,15 +566,15 @@ p{
 
   #canvas-container {
     height: 458px;
-}
-  #variables{
+  }
+  #variables {
     width: 100%;
   }
-  .main__task-div footer p{
+  .main__task-div footer p {
     height: 1px;
   }
-  p{
-    margin-bottom: 65px; 
+  p {
+    margin-bottom: 65px;
   }
 }
 /* 
