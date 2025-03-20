@@ -225,7 +225,7 @@ em:current font size
     margin-left: 10px;
   }
   .datatable {
-    width: 140px;
+    /* width: 140px; */
     font-size: 16px;
     text-align: center;
   }
@@ -233,7 +233,7 @@ em:current font size
   .datatable table {
     border: 1px solid #000011;
     border-collapse: collapse;
-    width: 120px;
+    /* width: 120px; */
   }
   #datatable1 {
     left: 166px;
@@ -313,7 +313,7 @@ em:current font size
   } */
 
   .datatable {
-    width: 140px;
+    /* width: 140px; */
     font-size: 1.6rem;
     text-align: center;
   }
@@ -321,7 +321,7 @@ em:current font size
   .datatable table {
     border: 1px solid #000011;
     border-collapse: collapse;
-    width: 120px;
+    /* width: 120px; */
   }
   #datatable1 {
     left: 124px;
@@ -416,7 +416,7 @@ em:current font size
      font-family: "Nunito", sans-serif;
   } */
   .datatable {
-    width: 140px;
+    /* width: 140px; */
     font-size: 14px;
     text-align: center;
   }
@@ -424,7 +424,7 @@ em:current font size
   .datatable table {
     border: 1px solid #000011;
     border-collapse: collapse;
-    width: 120px;
+    /* width: 120px; */
   }
 
   #datatable1 {
@@ -529,7 +529,7 @@ em:current font size
      font-family: "Nunito", sans-serif;
   } */
   .datatable {
-    width: 140px;
+    /* width: 140px; */
     font-size: 16px;
     text-align: center;
   }
@@ -537,7 +537,7 @@ em:current font size
   .datatable table {
     border: 1px solid #000011;
     border-collapse: collapse;
-    width: 120px;
+    /* width: 120px; */
   }
   #datatable1 {
     left: 11px;
