@@ -250,17 +250,9 @@ em:current font size
   #datatable2 p {
     margin-bottom: 5px;
   }
-  /* #titleincanvas {
-  position: absolute;
-  left: 351px;
-  top: 47px;
-} */
+
   p {
     margin-bottom: 70px;
-  }
-
-  #variables {
-    width: 100%;
   }
 }
 
@@ -333,9 +325,6 @@ em:current font size
     top: 241px;
   }
 
-  #variables {
-    width: 100%;
-  }
   .tool-list span {
     font-size: 1.6rem;
   }
@@ -443,9 +432,6 @@ em:current font size
     top: 47px;
   } */
 
-  #variables {
-    width: 100%;
-  }
   #canvas-container {
     margin-left: 0;
   }
@@ -567,9 +553,7 @@ em:current font size
   #canvas-container {
     height: 458px;
   }
-  #variables {
-    width: 100%;
-  }
+
   .main__task-div footer p {
     height: 1px;
   }
